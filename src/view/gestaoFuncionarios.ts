@@ -1,4 +1,4 @@
-export function gestaoFuncionario() {
+export function gestaoFuncionarios() {
 
     let gestaoFuncionarioLoop = true
 
