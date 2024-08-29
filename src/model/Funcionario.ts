@@ -1,14 +1,20 @@
 export class Funcionario {
+    private idFuncionario: number;
     private cpf: string;
     private nome: string;
-    private nascimento: Date;
-    private dataContratacao: Date;
+    private dataContratacao: string;
     private cargo: string;
 
-    constructor(cpf: string, nome: string, nascimento: Date, dataContratacao: Date, cargo: string) {
+    constructor(
+        idFuncionario: number,
+        cpf: string,
+        nome: string,
+        dataContratacao: string,
+        cargo: string
+    ) {
+        this.idFuncionario = idFuncionario;
         this.cpf = cpf;
         this.nome = nome;
-        this.nascimento = nascimento;
         this.dataContratacao = dataContratacao;
         this.cargo = cargo;
     }
