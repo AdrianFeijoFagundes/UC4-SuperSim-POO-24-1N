@@ -1,39 +1,39 @@
+let ask = require("readline-sync")
+
 import { menuFuncionamento } from "./menuFuncionamento"
 import { menuGestao } from "./menuGestao"
 
+
 function menuMercado() {
-    console.log(`
+    while(true) {
+        console.clear()
+                console.log(`\
+                -----------------------------
+                ---------- MERCADO ----------
+                -----------------------------
+                - 1. GESTAO                 -
+                - 2. FUNCIONAMENTO          -
+                -----------------------------
+                `)
+        let userOptionMenuMercado = ask.questionInt("Qual desejas? \nR: ")
 
-    -----------------------------
-    ---------- MERCADO ----------
-    -----------------------------
-    - 1. GESTAO                 -
-    - 2. FUNCIONAMENTO          -
-    -----------------------------
-    `)
-
-    let userOptionMenuMercado = 1
-
-    switch (userOptionMenuMercado) {
-
-        case 1:
-
-            console.clear()
-
-            menuFuncionamento()
+        switch (userOptionMenuMercado) {
             
-            break
-        case 2:
+            case 1:
+                console.clear()
+                menuGestao()       
+                break
 
-            console.clear()
+            case 2:
+                console.clear()
+                menuFuncionamento() 
+                break
 
-            menuGestao()
-
-            break
-        default:
-
-            console.log("OPCAO INVALIDA...")
-
-            break
+            default:
+                console.log("OPCAO INVALIDA...")
+                break
+        }
     }
 }
+
+menuMercado()
