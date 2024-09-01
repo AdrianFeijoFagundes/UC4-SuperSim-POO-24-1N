@@ -23,15 +23,33 @@ export class Mercado {
         this.notasFiscais = [] 
     }
 
-    public adicionarFornecedor(): void {}
-    public adicionarFuncionario(): void {}
+    // Gestão de Produtos
+    public listarProdutos(): void {}
     public adicionarProduto(): void {}
-    public adicionarVenda(): void {}
+    public removerProduto(): void {}
+    public atualizarProduto(): void {}
+    // Gestão de Funcionários
+    public listarFuncionarios(): void {}
+    public adicionarFuncionario(): void {}
+    public removerFuncionario(): void {}
+    public atualizarFuncionario(): void {}
+
+    // Gestão de Fornecedores
+    public listarFornecedores(): void {}
+    public adicionarFornecedor(): void {}
+    public removerFornecedor(): void {}
+    public atualizarFornecedor(): void {}
+    
     public adicionarPedidoFornecedor(): void {}
+    // Relatórios
+    public relatorioVendas(): void {}
+    public relatorioEstoque(): void {}
+    public relatorioPedidos(): void {}
+
+
+    // Vendas
+    public adicionarVenda(): void {}
     public adicionarNotaFiscal(): void {}
 
-    public removerFornecedor(): void {}
-    public removerFuncionario(): void {}
-    public removerProduto(): void {}
 
 }
