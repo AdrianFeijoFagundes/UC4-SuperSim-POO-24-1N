@@ -19,5 +19,32 @@ export class Venda {
         this.valorTotal = valorTotal;
     }
 
-
+    
+    public getIdNotaFiscal(): number {
+        return this.idNotaFiscal;        
+    }
+    public setIdNotaFiscal(idNotaFiscal: number): void {
+        this.idNotaFiscal = idNotaFiscal;
+    }
+    
+    public getIdProduto(): number {
+        return this.idProduto;
+    }
+    public setIdProduto(idProduto: number): void {
+        this.idProduto = idProduto;
+    }
+        
+    public getQuantidade(): number {
+        return this.quantidade;
+    }
+    public setQuantidade(quantidade: number): void {
+        this.quantidade = quantidade;
+    }
+    
+    public getValorTotal(): number {
+        return this.valorTotal;
+    }
+    public setValorTotal(valorTotal: number): void {
+        this.valorTotal = valorTotal
+    }
 }
