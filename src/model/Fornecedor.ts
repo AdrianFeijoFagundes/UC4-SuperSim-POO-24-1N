@@ -8,8 +8,24 @@ export class Fornecedor {
         cnpj: string,
         nomeEmpresa: string
     ) {
-        this.idFornecedor = idFornecedor
+        this.idFornecedor = idFornecedor;
         this.cnpj = cnpj;
-        this.nomeEmpresa = nomeEmpresa
+        this.nomeEmpresa = nomeEmpresa;
+    }
+
+    public getId(): number {
+        return this.idFornecedor;
+    }
+    public getCNPJ(): string {
+        return this.cnpj;
+    }
+    public setCNPJ(cnpj: string) {
+        this.cnpj = cnpj;
+    }
+    public getNomeEmpresa(): string {
+        return this.nomeEmpresa;
+    }
+    public setNomeEmpresa(empresa: string) {
+        this.nomeEmpresa = empresa;
     }
 }

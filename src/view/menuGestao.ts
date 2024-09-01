@@ -1,7 +1,7 @@
 import { gestaoFornecedores } from "./gestaoFornecedores"
 import { gestaoFuncionarios } from "./gestaoFuncionarios"
 import { gestaoProdutos } from "./gestaoProdutos"
-import { menuRelatorios } from "./MenuRelatorios"
+import { menuRelatorios } from "./menuRelatorios"
 
 export function menuGestao() {
 

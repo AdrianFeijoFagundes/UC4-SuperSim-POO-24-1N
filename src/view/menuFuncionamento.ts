@@ -16,9 +16,6 @@ export function menuFuncionamento() {
       - 3. VOLTAR                 -
       -----------------------------`)
 
-
-
-
         let userOptionMenuFuncionamento = 1
 
 

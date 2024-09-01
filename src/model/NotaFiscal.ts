@@ -15,4 +15,29 @@ export class NotaFiscal {
         this.metodoPagamento = metodoPagamento;
         this.cpfCliente = cpfCliente;
     }
+
+    public getId(): number {
+        return this.idNotaFiscal;
+    }
+
+    public getValorTotal(): number {
+        return this.valorTotal;
+    }
+    public setValorTotal(valorTotal: number): void {
+        this.valorTotal = valorTotal
+    }
+    
+    public getMetodoPagamento(): string {
+        return this.metodoPagamento;
+    }
+    public setMetodoPagamento(metodoPagamento: string): void {
+        this.metodoPagamento = metodoPagamento;
+    }
+    
+    public getCpfCliente(): string {
+        return this.cpfCliente;
+    }
+    public setCpfCliente(cpf : string): void {
+        this.cpfCliente = cpf;
+    }
 }
