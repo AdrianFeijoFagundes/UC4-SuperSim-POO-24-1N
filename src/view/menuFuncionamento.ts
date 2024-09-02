@@ -1,6 +1,8 @@
+import { Mercado } from "../controllers/Mercado"
+
 let ask = require("readline-sync")
 
-export function menuFuncionamento() {
+export function menuFuncionamento(mercado: Mercado): Mercado {
     let menuFuncionamentoLoop = true
 
     while (menuFuncionamentoLoop) {
@@ -17,7 +19,7 @@ export function menuFuncionamento() {
 
 
 
-        let userOptionMenuFuncionamento = 1
+        let userOptionMenuFuncionamento = ask.questionInt("Qual desejas? \nR: ")
 
 
         switch (userOptionMenuFuncionamento) {
@@ -40,8 +42,10 @@ export function menuFuncionamento() {
                 break
 
             default:
+                console.clear()
                 console.log("OPCAO INVALIDA...")
                 break
         }
     }
+    return mercado;
 }

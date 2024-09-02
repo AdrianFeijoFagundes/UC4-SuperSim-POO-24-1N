@@ -28,4 +28,11 @@ export class Fornecedor {
     public setNomeEmpresa(empresa: string) {
         this.nomeEmpresa = empresa;
     }
+    public clone(): Fornecedor {
+        return new Fornecedor(
+            this.idFornecedor,
+            this.cnpj,
+            this.nomeEmpresa,
+        );
+    }
 }

@@ -1,11 +1,12 @@
 let ask = require("readline-sync")
 
+import { Mercado } from "../controllers/Mercado"
 import { gestaoFornecedores } from "./gestaoFornecedores"
 import { gestaoFuncionarios } from "./gestaoFuncionarios"
 import { gestaoProdutos } from "./gestaoProdutos"
 import { menuRelatorios } from "./menuRelatorios"
 
-export function menuGestao() {
+export function menuGestao(mercado: Mercado): Mercado {
     let menuGestaoLoop = true
 
     while (menuGestaoLoop) {
@@ -27,25 +28,25 @@ export function menuGestao() {
 
             case 1:
                 console.clear()
-                gestaoProdutos()
+                gestaoProdutos(mercado)
                 break
 
             case 2:
                 console.clear()
                 //Substituir pelas outras functions de menu GESTAO FUNCIONARIO
-                gestaoFuncionarios()
+                gestaoFuncionarios(mercado)
                 break
 
             case 3:
                 console.clear()
                 //Substituir pelas outras functions de menu GESTAO FORNECEDORES
-                gestaoFornecedores()
+                gestaoFornecedores(mercado)
                 break
 
             case 4:
                 console.clear()
                 //Substituir pelas outras functions de menu RELATORIOS
-                menuRelatorios()
+                menuRelatorios(mercado)
                 break
 
             case 5:
@@ -59,5 +60,6 @@ export function menuGestao() {
                 break
         }
     }
+    return mercado;
 }
 

@@ -47,4 +47,13 @@ export class Venda {
     public setValorTotal(valorTotal: number): void {
         this.valorTotal = valorTotal
     }
+    public clone(): Venda {
+        return new Venda(
+            this.idVenda,
+            this.idNotaFiscal,
+            this.idProduto,
+            this.quantidade,
+            this.valorTotal,
+        );
+    }
 }

@@ -1,6 +1,8 @@
+import { Mercado } from "../controllers/Mercado"
+
 let ask = require("readline-sync")
 
-export function gestaoFuncionarios() {
+export function gestaoFuncionarios(mercado: Mercado): Mercado {
     let gestaoFuncionarioLoop = true
 
     while (gestaoFuncionarioLoop) {
@@ -52,4 +54,5 @@ export function gestaoFuncionarios() {
                 break
         }
     }
+    return mercado;
 }

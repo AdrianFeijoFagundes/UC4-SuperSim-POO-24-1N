@@ -67,4 +67,15 @@ export class PedidoFornecedor {
     public setValorTotal(valorTotal: number): void {
         this.valorTotal = valorTotal
     }
+    public clone(): PedidoFornecedor {
+        return new PedidoFornecedor(
+            this.idPedido,
+            this.idNotaFiscal,
+            this.idFornecedor,
+            this.idProduto,
+            this.dataDeEntrega,
+            this.quantidade,
+            this.valorTotal,
+        );
+    }
 }

@@ -40,4 +40,12 @@ export class NotaFiscal {
     public setCpfCliente(cpf : string): void {
         this.cpfCliente = cpf;
     }
+    public clone(): NotaFiscal {
+        return new NotaFiscal(
+            this.idNotaFiscal,
+            this.valorTotal,
+            this.metodoPagamento,
+            this.cpfCliente
+        );
+    }
 }

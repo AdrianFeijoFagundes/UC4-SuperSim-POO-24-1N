@@ -1,6 +1,8 @@
+import { Mercado } from "../controllers/Mercado"
+
 let ask = require("readline-sync")
 
-export function menuRelatorios() {
+export function menuRelatorios(mercado: Mercado): Mercado {
     
     let menuRelatorioLoop = true
 
@@ -46,4 +48,5 @@ export function menuRelatorios() {
                 break
         }
     }
+    return mercado;
 }

@@ -50,5 +50,13 @@ export class Funcionario {
     public setCargo(cargo: string): void {
         this.cargo = cargo;
     }
-
+    public clone(): Funcionario {
+        return new Funcionario(
+            this.idFuncionario,
+            this.cpf,
+            this.nome,
+            this.dataContratacao,
+            this.cargo
+        );
+    }
 }

@@ -70,4 +70,15 @@ export class Produto {
     public setIdFornecedor(idFornecedor: number): void {
         this.idFornecedor = idFornecedor;
     }
+    public clone(): Produto {
+        return new Produto(
+            this.idProduto,
+            this.nome,
+            this.categoria,
+            this.custoCompra,
+            this.valorVenda,
+            this.quantidade,
+            this.idFornecedor,
+        );
+    }
 }
