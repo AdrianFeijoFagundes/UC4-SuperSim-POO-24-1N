@@ -3,7 +3,7 @@ export class Venda {
         private idVenda: number,
         private idNotaFiscal: number,
         private idProduto: number,
-        private equantidade: number,
+        private quantidade: number,
         private valorTotal: number
     ) {}
  
