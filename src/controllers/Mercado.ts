@@ -1,28 +1,28 @@
-import { Fornecedor } from "../model/Fornecedor"
-import { Funcionario } from "../model/Funcionario"
-import { NotaFiscal } from "../model/NotaFiscal"
-import { PedidoFornecedor } from "../model/PedidoFornecedor"
-import { Produto } from "../model/Produto"
-import { Venda } from "../model/Venda"
+import { Fornecedor } from "../model/Fornecedor";
+import { Funcionario } from "../model/Funcionario";
+import { NotaFiscal } from "../model/NotaFiscal";
+import { PedidoFornecedor } from "../model/PedidoFornecedor";
+import { Produto } from "../model/Produto";
+import { Venda } from "../model/Venda";
 
-let ask = require("readline-sync")
+let ask = require("readline-sync");
 
 export class Mercado {
-    private fornecedores: Fornecedor[]
-    private funcionarios: Funcionario[]
-    private produtos: Produto[]
-    private vendas: Venda[]
-    private pedidosFornecedor: PedidoFornecedor[]
-    private notasFiscais: NotaFiscal[]
+    private fornecedores: Fornecedor[];
+    private funcionarios: Funcionario[];
+    private produtos: Produto[];
+    private vendas: Venda[];
+    private pedidosFornecedor: PedidoFornecedor[];
+    private notasFiscais: NotaFiscal[];
 
     constructor() {
-        this.fornecedores = []
-        this.funcionarios = []
-        this.produtos = []
-        this.produtos = []
-        this.vendas = []
-        this.pedidosFornecedor = []
-        this.notasFiscais = [] 
+        this.fornecedores = [];
+        this.funcionarios = [];
+        this.produtos = [];
+        this.produtos = [];
+        this.vendas = [];
+        this.pedidosFornecedor = [];
+        this.notasFiscais = [];
     }
 
     // Gestão de Produtos
@@ -46,17 +46,17 @@ export class Mercado {
     // Gestão de Fornecedores
     public listarFornecedores(): void {
         if (this.fornecedores.length === 0) {
-            console.log("Não existe nenhum fornecedor cadastrado.")
+            console.log("Não existe nenhum fornecedor cadastrado.");
         } else {
             for (let i = 0; i < this.fornecedores.length; i++) {
-                console.log(this.fornecedores[i].toString())
+                console.log(this.fornecedores[i].toString());
             }
         }
     }
 
     public adicionarFornecedor(cnpj: string, nomeEmpresa: string): void {
         //Pensar em maneira eficiente de adicionar o id
-        let id = this.fornecedores.length + 1
+        let id = this.fornecedores.length + 1;
         let novoFornecedor = new Fornecedor(id, cnpj, nomeEmpresa);
         this.fornecedores.push(novoFornecedor);
     }
