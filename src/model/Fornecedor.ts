@@ -28,6 +28,13 @@ export class Fornecedor {
     public setNomeEmpresa(empresa: string) {
         this.nomeEmpresa = empresa;
     }
+
+    public toString(): string {
+        return `id:  ${this.idFornecedor} | CNPJ: ${this.cnpj} | Nome da empresa: ${this.nomeEmpresa}`
+    }
+
+
+
     public clone(): Fornecedor {
         return new Fornecedor(
             this.idFornecedor,

@@ -24,14 +24,21 @@ export function gestaoFornecedores(mercado: Mercado): Mercado {
         switch (userOptionGestaoFuncionario) {
 
             case 1:
+                console.clear()
+
                 //Function que cria um fornecedor
-                console.log("Criar Forneceder")
+                mercado.adicionarFornecedor(
+                    ask.question("Qual o CNPJ da empresa?\nR: "),
+                    ask.question("Qual o nome da empresa?\nR: ")
+                )
+                ask.question("Clique para sair...\n")
                 break
 
             case 2:
                 console.clear()
                 //Function para listar fornecedores
-                console.log("Listar Fornecedores 2")
+                mercado.listarFornecedores()
+                ask.question("Clique para sair...\n")
                 break
 
             case 3:
