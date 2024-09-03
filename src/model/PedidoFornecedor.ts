@@ -1,36 +1,43 @@
+import { Fornecedor } from './Fornecedor';
+import { Produto    } from './Produto';
+
 export class PedidoFornecedor {
-    public constructor(
-        private idPedido: number,	
-        private idNotaFiscal: number,
-        private idFornecedor: number,	
-        private idProduto: number, 
-        private dataDeEntrega: string,
-        private quantidade: number,
-        private valorTotal: number
-    ) {}
+	private produtos:   Produto[] = [];
+	private valorTotal: number    = 0;
 
-    public getIdNotaFiscal(): number { return this.idNotaFiscal; }
-    public setIdNotaFiscal(idNotaFiscal: number): void { this.idNotaFiscal = idNotaFiscal; }
-    public getIdFornecedor(): number { return this.idFornecedor; }
-    public setIdFornecedor(idFornecedor : number): void { this.idFornecedor = idFornecedor; }
-    public getIdProduto(): number { return this.idProduto; }
-    public setIdProduto(idProduto: number): void { this.idProduto = idProduto; }
-    public getDataDeEntrega(): string { return this.dataDeEntrega; }
-    public setDataDeEntrega(dataDeEntrega: string): void { this.dataDeEntrega = dataDeEntrega; }
-    public getQuantidade(): number { return this.quantidade; }
-    public setQuantidade(quantidade: number): void { this.quantidade = quantidade; }
-    public getValorTotal(): number { return this.valorTotal; }
-    public setValorTotal(valorTotal: number): void { this.valorTotal = valorTotal; }
+	public constructor(private fornecedor: Fornecedor, produtos: Produto[] | undefined | null) {
+		if (produtos) this.setProdutos(produtos);
+	}
+    
+	public getValorTotal(): number     { return this.valorTotal; }
+	public getProdutos():   Produto[]  { return this.produtos;   }
+	public getFornecedor(): Fornecedor { return this.fornecedor; }
 
-    public clone(): PedidoFornecedor {
-        return new PedidoFornecedor(
-            this.idPedido,
-            this.idNotaFiscal,
-            this.idFornecedor,
-            this.idProduto,
-            this.dataDeEntrega,
-            this.quantidade,
-            this.valorTotal,
-        );
-    }
+	public setProdutos(produtos: Produto[]): void {
+		try {
+			this.produtos   = [];
+			this.valorTotal = 0;
+
+			produtos.forEach(produto => {
+				const clonado = produto.clone();
+				this.produtos.push(clonado);
+				this.valorTotal += clonado.getValorVenda();
+			});
+		} catch (error) {
+			console.error(`setProdutos(): ${error}`);
+		}
+	}
+
+	public adicionarProduto(produto: Produto): void {
+		try {
+			this.produtos.push(produto);
+			this.valorTotal += produto.getValorVenda();
+		} catch (error) {
+			console.error(`adicionarProduto(): ${error}`);
+		}
+	}
+
+	public clone(): PedidoFornecedor {
+		return new PedidoFornecedor(this.fornecedor.clone(), this.produtos);
+	}
 };

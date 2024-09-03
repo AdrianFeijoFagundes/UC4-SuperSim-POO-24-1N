@@ -1,25 +1,20 @@
 export class Fornecedor {
-    public constructor(
-        private idFornecedor: number,
-        private cnpj: string,
-        private nomeEmpresa: string
-    ) {}
+	public constructor(
+		private cnpj: string,
+		private nome: string
+	) {}
 
-    public getId(): number { return this.idFornecedor; }
-    public getCNPJ(): string { return this.cnpj; }
-    public setCNPJ(cnpj: string) { this.cnpj = cnpj; }
-    public getNomeEmpresa(): string { return this.nomeEmpresa; }
-    public setNomeEmpresa(empresa: string) { this.nomeEmpresa = empresa; }
+	public getCnpj(): string { return this.cnpj; }
+	public getNome(): string { return this.nome; }
 
-    public toString(): string {
-        return `id:  ${this.idFornecedor} | CNPJ: ${this.cnpj} | Nome da empresa: ${this.nomeEmpresa}`
-    }
+	public setCnpj(cnpj: string): void { this.cnpj = cnpj; }
+	public setNome(nome: string): void { this.nome = nome; }
 
-    public clone(): Fornecedor {
-        return new Fornecedor(
-            this.idFornecedor,
-            this.cnpj,
-            this.nomeEmpresa,
-        );
-    }
+	public toString(): string {
+		return `CNPJ: ${this.cnpj} | Nome da empresa: ${this.nome}`
+	}
+
+	public clone(): Fornecedor {
+		return new Fornecedor(this.cnpj, this.nome);
+	}
 };

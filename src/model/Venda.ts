@@ -1,28 +1,69 @@
-export class Venda {
-    public constructor(
-        private idVenda: number,
-        private idNotaFiscal: number,
-        private idProduto: number,
-        private quantidade: number,
-        private valorTotal: number
-    ) {}
- 
-    public getIdNotaFiscal(): number { return this.idNotaFiscal;         }
-    public setIdNotaFiscal(idNotaFiscal: number): void { this.idNotaFiscal = idNotaFiscal; }
-    public getIdProduto(): number { return this.idProduto; }
-    public setIdProduto(idProduto: number): void { this.idProduto = idProduto; }
-    public getQuantidade(): number { return this.quantidade; }
-    public setQuantidade(quantidade: number): void { this.quantidade = quantidade; }
-    public getValorTotal(): number { return this.valorTotal; }
-    public setValorTotal(valorTotal: number): void { this.valorTotal = valorTotal }
+import { Produto    } from './Produto';
 
-    public clone(): Venda {
-        return new Venda(
-            this.idVenda,
-            this.idNotaFiscal,
-            this.idProduto,
-            this.quantidade,
-            this.valorTotal,
-        );
-    }
+export class Venda {
+	private produtos:   Produto[] = [];
+	private valorTotal: number    = 0;
+
+	public constructor(produtos: Produto[] | undefined | null) {
+		if (produtos) this.setProdutos(produtos);
+	}
+    
+	public getQuantidade(): number { return this.produtos.length; }
+	public getValorTotal(): number { return this.valorTotal;      }
+
+	public setProdutos(produtos: Produto[]): void {
+		try {
+			this.produtos   = [];
+			this.valorTotal = 0;
+
+			produtos.forEach(produto => {
+				const clonado = produto.clone();
+				this.produtos.push(clonado);
+				this.valorTotal += clonado.getValorVenda();
+			});
+		} catch (error) {
+			console.error(`setProdutos(): ${error}`);
+		}
+	}
+	
+	public adicionarProduto(produto: Produto): void {
+		try {
+			this.produtos.push(produto);
+			this.valorTotal += produto.getValorVenda();
+		} catch (error) {
+			console.error(`adicionarProduto(): ${error}`);
+		}
+	}
+
+	public emitirNotaFiscal(nomeComprador: string, cpfComprador: string | undefined | null): string {
+		const dataString = new Date().toLocaleDateString('pt-BR');
+		const numeroNota = Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+
+		let notaFiscal = `---------- NOTA FISCAL ----------\n`
+				+ `Número: ${numeroNota}\n`
+				+ `Data: ${dataString}\n`
+				+ `---------------------------------\n`;
+
+		this.produtos.forEach((produto, index) => {
+			notaFiscal += `Produto ${index + 1}: ${produto.getNome()} - R$ ${produto.getValorVenda().toFixed(2)}\n`;
+		});
+
+		notaFiscal += `Preço final: ${this.valorTotal}\n`;
+		notaFiscal += `---------------------------------\n`;
+		notaFiscal += `Cliente: ${nomeComprador}\n`;
+
+		if (cpfComprador)
+			notaFiscal += `CPF: ${cpfComprador}\n`;
+
+		notaFiscal += `---------------------------------\n`;
+		return notaFiscal;
+	}
+
+	public toString(): string {
+		return this.produtos.join(", ");
+	}
+
+	public clone(): Venda {
+		return new Venda(this.produtos);
+	}
 };
