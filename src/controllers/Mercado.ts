@@ -211,6 +211,30 @@ export class Mercado {
 			console.log(`adicionarVenda(): ${error}`);
 		}
 	}
+
+	public comprarProduto(indice: number, quantidade: number): Produto {
+		let produtoComprado = this.produtos[indice].clone()
+
+		//Mudando a quantidade no estoque
+		produtoComprado.setEstoque(quantidade)
+		let novaQtdProdutos = this.produtos[indice].getEstoque() - produtoComprado.getEstoque()
+		
+		// nova quantidade do estoque
+		this.produtos[indice].setEstoque(novaQtdProdutos)
+		return produtoComprado
+	}
+	public verificarEstoque(indice: number, quantidade: number): boolean {
+		if (indice > this.produtos.length + 1) {
+			console.log("O produto não está cadastrado")
+			return false
+		}
+		if (this.produtos[indice].getEstoque() < quantidade) {
+			console.log("Não é possivel comprar essa quantidade")
+			return false
+		} else {
+			return true
+		}
+	}
 	
 	public relatorioVendas(): void {}
 	public relatorioEstoque(): void {}

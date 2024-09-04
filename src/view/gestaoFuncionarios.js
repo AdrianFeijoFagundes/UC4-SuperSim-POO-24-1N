@@ -12,6 +12,7 @@ function gestaoFuncionarios(mercado) {
         switch (userOptionGestaoFuncionario) {
             case 1:
                 //Function que cria um funcionario
+                console.clear();
                 var nome = ask.question('Qual o nome do funcionario?\n R: ');
                 var cpf = ask.question('Qual o CPF do funcionario?\n R: ');
                 console.log('Qual o cargo do Funcionário? ');
@@ -32,6 +33,7 @@ function gestaoFuncionarios(mercado) {
                 break;
             case 3:
                 //Metodo set do funcionario se baseando no id do mesmo
+                console.clear();
                 mercado.listarFuncionarios();
                 var indice = ask.questionInt("Qual o id do funcionario?\n R: ");
                 console.log('Qual o novo cargo do funcionario?');
@@ -44,6 +46,7 @@ function gestaoFuncionarios(mercado) {
                 console.clear();
                 //Function para excluir se baseando no id do mesmo
                 console.log("Demitindo Funcionário");
+                mercado.listarFuncionarios();
                 cpf = ask.question('Qual o CPF do funcionário?\n R: ');
                 mercado.removerFuncionario(cpf);
                 console.log("EXCLUIR FUNCIONARIO");

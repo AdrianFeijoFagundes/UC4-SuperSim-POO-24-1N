@@ -20,7 +20,7 @@ var PedidoFornecedor = /** @class */ (function () {
             produtos.forEach(function (produto) {
                 var clonado = produto.clone();
                 _this.produtos.push(clonado);
-                _this.valorTotal += clonado.getValorVenda();
+                _this.valorTotal += clonado.getValorTotalVenda();
             });
         }
         catch (error) {
@@ -30,7 +30,7 @@ var PedidoFornecedor = /** @class */ (function () {
     PedidoFornecedor.prototype.adicionarProduto = function (produto) {
         try {
             this.produtos.push(produto);
-            this.valorTotal += produto.getValorVenda();
+            this.valorTotal += produto.getValorTotalVenda();
         }
         catch (error) {
             console.error("adicionarProduto(): ".concat(error));

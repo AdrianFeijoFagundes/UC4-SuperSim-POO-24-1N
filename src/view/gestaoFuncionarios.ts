@@ -24,6 +24,7 @@ export function gestaoFuncionarios(mercado: Mercado): Mercado {
 
             case 1:
                 //Function que cria um funcionario
+                console.clear()
                 let nome = ask.question('Qual o nome do funcionario?\n R: ')
                 let cpf = ask.question('Qual o CPF do funcionario?\n R: ')
                 console.log('Qual o cargo do Funcionário? ')
@@ -46,6 +47,7 @@ export function gestaoFuncionarios(mercado: Mercado): Mercado {
 
             case 3:
                 //Metodo set do funcionario se baseando no id do mesmo
+                console.clear()
                 mercado.listarFuncionarios()
                 let indice = ask.questionInt("Qual o id do funcionario?\n R: ")
                 console.log('Qual o novo cargo do funcionario?')

@@ -1,0 +1,9 @@
+fazer controle de estoque mudando a quantidade de itens quando ocorrer uma compra
+
+fazer relatórios de:
+	Vendas
+	Pedidos
+	Estoque
+
+
+exibir todos os produtos

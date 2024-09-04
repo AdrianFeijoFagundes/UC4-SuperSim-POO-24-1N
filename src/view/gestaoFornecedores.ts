@@ -25,12 +25,10 @@ export function gestaoFornecedores(mercado: Mercado): Mercado {
 
             case 1:
                 console.clear()
-
+                let cnpj =  ask.question("Qual o CNPJ da empresa?\nR: ")
+                let nomeDaEmpresa = ask.question("Qual o nome da empresa?\nR: ")
                 //Function que cria um fornecedor
-                mercado.adicionarFornecedor(
-                    ask.question("Qual o CNPJ da empresa?\nR: "),
-                    ask.question("Qual o nome da empresa?\nR: ")
-                )
+                mercado.adicionarFornecedor(cnpj, nomeDaEmpresa)
                 ask.question("Clique para sair...\n")
                 break
 
@@ -42,13 +40,21 @@ export function gestaoFornecedores(mercado: Mercado): Mercado {
                 break
 
             case 3:
+                console.clear()
+                mercado.listarFornecedores()
+                let indice = ask.questionInt("Qual o id do fornecedor?\n R: ")
+                cnpj =  ask.question("Qual o novo CNPJ da empresa?\nR: ")
+                nomeDaEmpresa = ask.question("Qual o novo nome da empresa?\nR: ")
                 //Metodo set do funcionario se baseando no id do mesmo
-                console.log("METODO SET 3")
+                mercado.atualizarFornecedor(indice, cnpj, nomeDaEmpresa)
                 break
 
             case 4:
+                console.clear()
                 //Function para excluir se baseando no id do mesmo
-                console.log("EXCLUIR Fornecedor")
+                mercado.listarFornecedores()
+                cnpj = ask.question("Qual o novo CNPJ do fornecedor que vai ser removido?\nR: ")
+                mercado.removerFornecedor(cnpj)
                 break
             
             case 5:

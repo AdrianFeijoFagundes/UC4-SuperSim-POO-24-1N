@@ -172,6 +172,28 @@ var Mercado = /** @class */ (function () {
             console.log("adicionarVenda(): ".concat(error));
         }
     };
+    Mercado.prototype.comprarProduto = function (indice, quantidade) {
+        var produtoComprado = this.produtos[indice].clone();
+        //Mudando a quantidade no estoque
+        produtoComprado.setEstoque(quantidade);
+        var novaQtdProdutos = this.produtos[indice].getEstoque() - produtoComprado.getEstoque();
+        // nova quantidade do estoque
+        this.produtos[indice].setEstoque(novaQtdProdutos);
+        return produtoComprado;
+    };
+    Mercado.prototype.verificarEstoque = function (indice, quantidade) {
+        if (indice > this.produtos.length + 1) {
+            console.log("O produto não está cadastrado");
+            return false;
+        }
+        if (this.produtos[indice].getEstoque() < quantidade) {
+            console.log("Não é possivel comprar essa quantidade");
+            return false;
+        }
+        else {
+            return true;
+        }
+    };
     Mercado.prototype.relatorioVendas = function () { };
     Mercado.prototype.relatorioEstoque = function () { };
     Mercado.prototype.relatorioPedidos = function () { };

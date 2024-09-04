@@ -19,7 +19,7 @@ export class Venda {
 			produtos.forEach(produto => {
 				const clonado = produto.clone();
 				this.produtos.push(clonado);
-				this.valorTotal += clonado.getValorVenda();
+				this.valorTotal += clonado.getValorTotalVenda();
 			});
 		} catch (error) {
 			console.error(`setProdutos(): ${error}`);
@@ -29,7 +29,7 @@ export class Venda {
 	public adicionarProduto(produto: Produto): void {
 		try {
 			this.produtos.push(produto);
-			this.valorTotal += produto.getValorVenda();
+			this.valorTotal += produto.getValorTotalVenda();
 		} catch (error) {
 			console.error(`adicionarProduto(): ${error}`);
 		}
@@ -45,7 +45,7 @@ export class Venda {
 				+ `---------------------------------\n`;
 
 		this.produtos.forEach((produto, index) => {
-			notaFiscal += `Produto ${index + 1}: ${produto.getNome()} - R$ ${produto.getValorVenda().toFixed(2)}\n`;
+			notaFiscal += `Produto ${index + 1}: ${produto.getEstoque()}x ${produto.getNome()} - R$ ${produto.getValorTotalVenda().toFixed(2)}\n`;
 		});
 
 		notaFiscal += `Preço final: ${this.valorTotal}\n`;

@@ -18,7 +18,7 @@ var Venda = /** @class */ (function () {
             produtos.forEach(function (produto) {
                 var clonado = produto.clone();
                 _this.produtos.push(clonado);
-                _this.valorTotal += clonado.getValorVenda();
+                _this.valorTotal += clonado.getValorTotalVenda();
             });
         }
         catch (error) {
@@ -28,7 +28,7 @@ var Venda = /** @class */ (function () {
     Venda.prototype.adicionarProduto = function (produto) {
         try {
             this.produtos.push(produto);
-            this.valorTotal += produto.getValorVenda();
+            this.valorTotal += produto.getValorTotalVenda();
         }
         catch (error) {
             console.error("adicionarProduto(): ".concat(error));
@@ -42,7 +42,7 @@ var Venda = /** @class */ (function () {
             + "Data: ".concat(dataString, "\n")
             + "---------------------------------\n";
         this.produtos.forEach(function (produto, index) {
-            notaFiscal += "Produto ".concat(index + 1, ": ").concat(produto.getNome(), " - R$ ").concat(produto.getValorVenda().toFixed(2), "\n");
+            notaFiscal += "Produto ".concat(index + 1, ": ").concat(produto.getEstoque(), "x ").concat(produto.getNome(), " - R$ ").concat(produto.getValorTotalVenda().toFixed(2), "\n");
         });
         notaFiscal += "Pre\u00E7o final: ".concat(this.valorTotal, "\n");
         notaFiscal += "---------------------------------\n";

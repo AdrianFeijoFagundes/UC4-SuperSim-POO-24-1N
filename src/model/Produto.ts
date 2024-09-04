@@ -18,6 +18,8 @@ export class Produto {
 	public getValorVenda():  number     { return this.valorVenda;  }
 	public getEstoque():     number     { return this.estoque;     }
 	public getFornecedor():  Fornecedor { return this.fornecedor;  }
+	public getValorTotalCompra(): number { return this.valorCompra * this.estoque }
+	public getValorTotalVenda(): number { return this.valorVenda * this.estoque}
 
 	public setNome(nome: string):                 void { this.nome = nome;               }
 	public setMarca(marca: string):               void { this.marca = marca;             }

@@ -53,13 +53,13 @@ export function gestaoProdutos(mercado: Mercado): Mercado {
 
             case 3:
                 //Metodo set do produto se baseando no id do mesmo
-                console.clear()
-                mercado.listarProdutos()
+                console.clear();
+                mercado.listarProdutos();
                 let indice = ask.questionInt('Qual o id do produto que vai ser atualizado?\n R: ');
                 nome = ask.question('Qual o novo nome do produto?\n R: ');
                 marca =  ask.question(' Qual nova a marca do produto?\n R: ');
                 console.log('Qual a nova seçao do produto?');
-                Mercado.exibir(Mercado.secoes)             
+                Mercado.exibir(Mercado.secoes);           
                 secao = Mercado.secoes[ask.questionInt('R:  ')];
 
                 valorCompra = ask.questionInt('Qual o novo valor de Compra do Produto?\n R:  ');
@@ -74,6 +74,7 @@ export function gestaoProdutos(mercado: Mercado): Mercado {
 
             case 4:
                 //Function para excluir se baseando no id do mesmo
+                console.clear();
                 console.log('Removendo produto');
                 mercado.listarProdutos();
                 nome = ask.question('Qual o nome do produto?\n R:');

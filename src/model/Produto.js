@@ -18,6 +18,8 @@ var Produto = /** @class */ (function () {
     Produto.prototype.getValorVenda = function () { return this.valorVenda; };
     Produto.prototype.getEstoque = function () { return this.estoque; };
     Produto.prototype.getFornecedor = function () { return this.fornecedor; };
+    Produto.prototype.getValorTotalCompra = function () { return this.valorCompra * this.estoque; };
+    Produto.prototype.getValorTotalVenda = function () { return this.valorVenda * this.estoque; };
     Produto.prototype.setNome = function (nome) { this.nome = nome; };
     Produto.prototype.setMarca = function (marca) { this.marca = marca; };
     Produto.prototype.setSecao = function (secao) { this.secao = secao; };

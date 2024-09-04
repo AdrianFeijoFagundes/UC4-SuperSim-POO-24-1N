@@ -53,6 +53,7 @@ function gestaoProdutos(mercado) {
                 break;
             case 4:
                 //Function para excluir se baseando no id do mesmo
+                console.clear();
                 console.log('Removendo produto');
                 mercado.listarProdutos();
                 nome = ask.question('Qual o nome do produto?\n R:');

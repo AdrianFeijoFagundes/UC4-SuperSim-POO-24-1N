@@ -21,7 +21,7 @@ export class PedidoFornecedor {
 			produtos.forEach(produto => {
 				const clonado = produto.clone();
 				this.produtos.push(clonado);
-				this.valorTotal += clonado.getValorVenda();
+				this.valorTotal += clonado.getValorTotalVenda();
 			});
 		} catch (error) {
 			console.error(`setProdutos(): ${error}`);
@@ -31,7 +31,7 @@ export class PedidoFornecedor {
 	public adicionarProduto(produto: Produto): void {
 		try {
 			this.produtos.push(produto);
-			this.valorTotal += produto.getValorVenda();
+			this.valorTotal += produto.getValorTotalVenda();
 		} catch (error) {
 			console.error(`adicionarProduto(): ${error}`);
 		}
