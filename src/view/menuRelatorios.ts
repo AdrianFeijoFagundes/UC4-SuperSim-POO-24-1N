@@ -25,15 +25,26 @@ export function menuRelatorios(mercado: Mercado): Mercado {
             case 1:
                 console.clear()
                 //Function relatorio VENDAS
+                console.clear()
+                mercado.relatorioVendas()
+                ask.question("Clique para sair...\n")
+
                 break
 
             case 2:
                 console.clear()
                 //Function relatorio ESTOQUE
+                console.clear()
+                mercado.listarProdutos()
+                ask.question("Clique para sair...\n")
                 break
 
             case 3:
                 console.clear()
+
+                console.clear()
+                mercado.relatorioPedidos()
+                ask.question("Clique para sair...\n")
                 //Function relatorio PEDIDOS
                 break
 

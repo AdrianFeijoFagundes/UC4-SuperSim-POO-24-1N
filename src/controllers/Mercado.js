@@ -194,9 +194,19 @@ var Mercado = /** @class */ (function () {
             return true;
         }
     };
-    Mercado.prototype.relatorioVendas = function () { };
-    Mercado.prototype.relatorioEstoque = function () { };
-    Mercado.prototype.relatorioPedidos = function () { };
+    Mercado.prototype.relatorioVendas = function () {
+        for (var i = 0; i < this.vendas.length; i++) {
+            console.log(this.vendas[i].toString());
+        }
+    };
+    Mercado.prototype.relatorioPedidos = function () {
+        if (this.pedidosFornecedor.length === 0) {
+            Mercado.listandoSemNada();
+        }
+        else {
+            console.table(this.pedidosFornecedor);
+        }
+    };
     Mercado.secoes = ['Alimentos', 'Limpeza', 'Bebidas'];
     Mercado.cargos = ['Gerente', 'Caixa', 'Estoquista'];
     return Mercado;

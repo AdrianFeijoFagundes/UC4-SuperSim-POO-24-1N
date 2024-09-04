@@ -22,8 +22,6 @@ export function menuFuncionamento(mercado: Mercado): Mercado {
     let compras : Produto[] = [];
     while (menuFuncionamentoLoop) {
         console.log(`
-      -  obs: caso houver uma compra em andamento ela será cancelada automaticamente ao sair desse menu. -`)
-        console.log(`
       -----------------------------
       ------- FUNCIONAMENTO -------
       -----------------------------
@@ -63,6 +61,7 @@ export function menuFuncionamento(mercado: Mercado): Mercado {
                     }
                     console.clear()
                 }
+                
                 break
 
             case 2:
@@ -96,14 +95,22 @@ export function menuFuncionamento(mercado: Mercado): Mercado {
                 console.log(mercado.vendas[mercado.vendas.length - 1].emitirNotaFiscal(nome, cpf))
                 //Funcionamento: IR PRO CAIXA
                 ask.question("Clique para sair...\n")
+                compras = []
                 console.clear()
                 break
 
             case 3:
-                compras = [];
-                console.clear()
+                if (compras.length === 0) {
+                    menuFuncionamentoLoop = false
+                    console.clear()
+                } else {
+                    console.log()
+                    ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n")
+                }
+               
+
                 //menu off
-                menuFuncionamentoLoop = false
+
                 break
 
             default:

@@ -38,7 +38,6 @@ export class Mercado {
 			console.table(this.produtos);
 		}
 	}
- 
 	public adicionarProduto(
 		nome:        string,
 		marca:       string,
@@ -236,7 +235,7 @@ export class Mercado {
 		}
 	}
 	
-	public relatorioVendas(): void {}
-	public relatorioEstoque(): void {}
+	public relatorioVendas(): void {
+	}
 	public relatorioPedidos(): void {}
 };

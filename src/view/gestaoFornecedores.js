@@ -40,8 +40,16 @@ function gestaoFornecedores(mercado) {
                 mercado.removerFornecedor(cnpj);
                 break;
             case 5:
+                var produtosPedido = [];
+                mercado.listarProdutos();
+                indice = ask.questionInt('Qual o id do produto?\nR: ');
+                var quantidade = ask.questionInt('Quantos produtos deseja pedir ao fornecedor?\nR: ');
+                var produtoEscolhido = mercado.produtos[indice].clone();
+                produtoEscolhido.setEstoque(quantidade);
+                produtosPedido.push(produtoEscolhido);
                 //Function para realizar pedido
-                console.log("Fazer Pedido p/ Fornecedor");
+                mercado.adicionarPedidoFornecedor(produtoEscolhido.getFornecedor().clone(), produtosPedido);
+                console.log("Pedido Realizado com sucesso");
                 break;
             case 6:
                 console.clear();

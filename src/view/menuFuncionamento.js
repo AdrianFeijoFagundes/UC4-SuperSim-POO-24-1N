@@ -18,7 +18,6 @@ function menuFuncionamento(mercado) {
     var menuFuncionamentoLoop = true;
     var compras = [];
     while (menuFuncionamentoLoop) {
-        console.log("\n      -  obs: caso houver uma compra em andamento ela ser\u00E1 cancelada automaticamente ao sair desse menu. -");
         console.log("\n      -----------------------------\n      ------- FUNCIONAMENTO -------\n      -----------------------------\n      - 1. COMPRAR                -\n      - 2. IR PARA O CAIXA        -\n      - 3. VOLTAR                 -\n      -----------------------------\n");
         exibirCompras(compras);
         var userOptionMenuFuncionamento = ask.questionInt("Qual desejas? \nR: ");
@@ -75,13 +74,19 @@ function menuFuncionamento(mercado) {
                 console.log(mercado.vendas[mercado.vendas.length - 1].emitirNotaFiscal(nome, cpf));
                 //Funcionamento: IR PRO CAIXA
                 ask.question("Clique para sair...\n");
+                compras = [];
                 console.clear();
                 break;
             case 3:
-                compras = [];
-                console.clear();
+                if (compras.length === 0) {
+                    menuFuncionamentoLoop = false;
+                    console.clear();
+                }
+                else {
+                    console.log();
+                    ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n");
+                }
                 //menu off
-                menuFuncionamentoLoop = false;
                 break;
             default:
                 console.clear();

@@ -1,4 +1,5 @@
 import { Mercado } from "../controllers/Mercado"
+import { Produto } from "../model/Produto"
 
 let ask = require("readline-sync")
 
@@ -58,8 +59,19 @@ export function gestaoFornecedores(mercado: Mercado): Mercado {
                 break
             
             case 5:
+                const produtosPedido: Produto[] = []
+                mercado.listarProdutos()
+                   
+                    
+                indice = ask.questionInt('Qual o id do produto?\nR: ')
+                let quantidade = ask.questionInt('Quantos produtos deseja pedir ao fornecedor?\nR: ')
+                let produtoEscolhido:Produto = mercado.produtos[indice].clone()
+                produtoEscolhido.setEstoque(quantidade)
+                produtosPedido.push(produtoEscolhido)
                 //Function para realizar pedido
-                console.log("Fazer Pedido p/ Fornecedor")
+                mercado.adicionarPedidoFornecedor(produtoEscolhido.getFornecedor().clone(), produtosPedido)
+                console.log("Pedido Realizado com sucesso")
+
                 break
 
             case 6:
