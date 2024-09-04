@@ -4,6 +4,12 @@ import { Mercado          } from '../controllers/Mercado';
 import { Produto          } from '../model/Produto';
 import { PedidoFornecedor } from '../model/PedidoFornecedor';
 
+/**
+	* Gerencia as operações relacionadas aos fornecedores no sistema.
+	* Exibe um menu de opções e permite ao usuário adicionar, listar, atualizar, excluir fornecedores e repor o estoque.
+	*
+	* @param mercado - A instância do objeto `Mercado` que gerencia os fornecedores e produtos.
+*/
 export function gestaoFornecedores(mercado: Mercado): void {
 	let opcao = '';
 
