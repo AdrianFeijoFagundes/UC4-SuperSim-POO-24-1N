@@ -1,4 +1,3 @@
-import { exibir, marcas, secoes } from "../controllers/infos";
 import { Mercado } from "../controllers/Mercado"
 
 let ask = require("readline-sync");
@@ -28,13 +27,11 @@ export function gestaoProdutos(mercado: Mercado): Mercado {
                 console.log('Adicionando novo produto');
                 let nome = ask.question('Qual o nome do produto?\n R: ');
                 
-                console.log('Qual a marca do produto')
-                exibir(marcas)
-                let marca = marcas[ask.questionInt('R:  ')];
+                let marca = ask.question(' Qual a marca do produto?\n R: ');
                 
                 console.log('Qual a seçao do produto?');
-                exibir(secoes);             
-                let secao = secoes[ask.questionInt('R:  ')];
+                Mercado.exibir(Mercado.secoes)             
+                let secao = Mercado.secoes[ask.questionInt('R:  ')];
 
                 let valorCompra = ask.questionInt('Qual o valor de Compra do Produto?\n R:  ');
                 let valorVenda = ask.questionInt('Qual o valor de Venda do Produto?\n R:  ');
@@ -45,7 +42,6 @@ export function gestaoProdutos(mercado: Mercado): Mercado {
                 let fornecedor = mercado.fornecedores[indiceFornecedor].clone()
                 //Function que cria um produto
                 mercado.adicionarProduto(nome, marca, secao, valorCompra,estoque, valorVenda, fornecedor)
-                console.log("Criar Produtos")
                 break
 
             case 2:
@@ -61,12 +57,10 @@ export function gestaoProdutos(mercado: Mercado): Mercado {
                 mercado.listarProdutos()
                 let indice = ask.questionInt('Qual o id do produto que vai ser atualizado?\n R: ');
                 nome = ask.question('Qual o novo nome do produto?\n R: ');
-                console.log('Qual a nova marca do produto')
-                exibir(marcas)
-                marca = marcas[ask.questionInt('R:  ')];
+                marca =  ask.question(' Qual nova a marca do produto?\n R: ');
                 console.log('Qual a nova seçao do produto?');
-                exibir(secoes);             
-                secao = secoes[ask.questionInt('R:  ')];
+                Mercado.exibir(Mercado.secoes)             
+                secao = Mercado.secoes[ask.questionInt('R:  ')];
 
                 valorCompra = ask.questionInt('Qual o novo valor de Compra do Produto?\n R:  ');
                 valorVenda = ask.questionInt('Qual o novo valor de Venda do Produto?\n R:  ');

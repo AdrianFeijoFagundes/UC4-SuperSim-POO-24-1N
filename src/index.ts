@@ -1,4 +1,4 @@
-import { marcas, secoes } from "./controllers/infos"
+
 import { Mercado } from "./controllers/Mercado"
 import { menuMercado } from "./view/menuMercado"
 
@@ -12,12 +12,13 @@ mercado.adicionarFornecedor('48955685000156','Fornecedor 3')
 mercado.adicionarFornecedor('42907758000158','Fornecedor 4')
 mercado.adicionarFornecedor('26169565000190','Fornecedor 5')
 
-mercado.adicionarProduto('Amaciante', marcas[2], secoes[1], 10, 20, 100, mercado.fornecedores[0])
-mercado.adicionarProduto('Detergente', marcas[0], secoes[1], 10, 20, 100, mercado.fornecedores[1])
-mercado.adicionarProduto('Refri', marcas[1], secoes[2], 10, 20, 100, mercado.fornecedores[2])
-mercado.adicionarProduto('Cerveja', marcas[4], secoes[2], 10, 20, 100, mercado.fornecedores[3])
-mercado.adicionarProduto('Salgadinho', marcas[3], secoes[1], 10, 20, 100, mercado.fornecedores[3])
-mercado.adicionarProduto('Maças', marcas[5], secoes[1], 10, 20, 100, mercado.fornecedores[4])
+mercado.adicionarProduto('Amaciante', '', Mercado.secoes[1], 10, 20, 100, mercado.fornecedores[0])
+mercado.adicionarProduto('Detergente', '', Mercado.secoes[1], 10, 20, 100, mercado.fornecedores[1])
+mercado.adicionarProduto('Refri', '', Mercado.secoes[2], 10, 20, 100, mercado.fornecedores[2])
+mercado.adicionarProduto('Cerveja', '', Mercado.secoes[2], 10, 20, 100, mercado.fornecedores[3])
+mercado.adicionarProduto('Salgadinho', '', Mercado.secoes[0], 10, 20, 100, mercado.fornecedores[3])
+mercado.adicionarProduto('Maças', '', Mercado.secoes[0], 10, 20, 100, mercado.fornecedores[4])
 
+mercado.adicionarFuncionario('04522681097','Adrian', new Date(2024, 9, 3), Mercado.cargos[0] )
 
 menuMercado(mercado);

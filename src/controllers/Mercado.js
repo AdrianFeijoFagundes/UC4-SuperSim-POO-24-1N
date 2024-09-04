@@ -14,6 +14,11 @@ var Mercado = /** @class */ (function () {
         this.vendas = [];
         this.pedidosFornecedor = [];
     }
+    Mercado.exibir = function (array) {
+        for (var i = 0; i < array.length; i++) {
+            console.log(i, array[i]);
+        }
+    };
     Mercado.indiceInvalido = function () {
         console.warn("Posi\u00E7\u00E3o selecionada fora dos limites.");
     };
@@ -170,6 +175,8 @@ var Mercado = /** @class */ (function () {
     Mercado.prototype.relatorioVendas = function () { };
     Mercado.prototype.relatorioEstoque = function () { };
     Mercado.prototype.relatorioPedidos = function () { };
+    Mercado.secoes = ['Alimentos', 'Limpeza', 'Bebidas'];
+    Mercado.cargos = ['Gerente', 'Caixa', 'Estoquista'];
     return Mercado;
 }());
 exports.Mercado = Mercado;

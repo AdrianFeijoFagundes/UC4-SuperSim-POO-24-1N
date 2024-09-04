@@ -13,8 +13,16 @@ export class Mercado {
 	public vendas:            Venda[]            = [];
 	public pedidosFornecedor: PedidoFornecedor[] = [];
 
+	public static secoes: string[] = ['Alimentos', 'Limpeza', 'Bebidas']
+	public static cargos: string[] = ['Gerente', 'Caixa', 'Estoquista']
+
 	public constructor() {}
 
+	public static exibir(array: string[]): void {
+		for (let i = 0; i < array.length; i++) {
+			console.log(i, array[i])
+		}
+	}
 	private static indiceInvalido(): void {
 		console.warn(`Posição selecionada fora dos limites.`);
 	}

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.gestaoProdutos = gestaoProdutos;
-var infos_1 = require("../controllers/infos");
+var Mercado_1 = require("../controllers/Mercado");
 var ask = require("readline-sync");
 function gestaoProdutos(mercado) {
     var gestaoProdutosLoop = true;
@@ -14,12 +14,10 @@ function gestaoProdutos(mercado) {
                 console.clear();
                 console.log('Adicionando novo produto');
                 var nome = ask.question('Qual o nome do produto?\n R: ');
-                console.log('Qual a marca do produto');
-                (0, infos_1.exibir)(infos_1.marcas);
-                var marca = infos_1.marcas[ask.questionInt('R:  ')];
+                var marca = ask.question(' Qual a marca do produto?\n R: ');
                 console.log('Qual a seçao do produto?');
-                (0, infos_1.exibir)(infos_1.secoes);
-                var secao = infos_1.secoes[ask.questionInt('R:  ')];
+                Mercado_1.Mercado.exibir(Mercado_1.Mercado.secoes);
+                var secao = Mercado_1.Mercado.secoes[ask.questionInt('R:  ')];
                 var valorCompra = ask.questionInt('Qual o valor de Compra do Produto?\n R:  ');
                 var valorVenda = ask.questionInt('Qual o valor de Venda do Produto?\n R:  ');
                 var estoque = ask.questionInt('Quantos produtos vao ser adicionados no estoque?\n R:  ');
@@ -28,7 +26,6 @@ function gestaoProdutos(mercado) {
                 var fornecedor = mercado.fornecedores[indiceFornecedor].clone();
                 //Function que cria um produto
                 mercado.adicionarProduto(nome, marca, secao, valorCompra, estoque, valorVenda, fornecedor);
-                console.log("Criar Produtos");
                 break;
             case 2:
                 console.clear();
@@ -38,15 +35,14 @@ function gestaoProdutos(mercado) {
                 break;
             case 3:
                 //Metodo set do produto se baseando no id do mesmo
+                console.clear();
                 mercado.listarProdutos();
                 var indice = ask.questionInt('Qual o id do produto que vai ser atualizado?\n R: ');
                 nome = ask.question('Qual o novo nome do produto?\n R: ');
-                console.log('Qual a nova marca do produto');
-                (0, infos_1.exibir)(infos_1.marcas);
-                marca = infos_1.marcas[ask.questionInt('R:  ')];
+                marca = ask.question(' Qual nova a marca do produto?\n R: ');
                 console.log('Qual a nova seçao do produto?');
-                (0, infos_1.exibir)(infos_1.secoes);
-                secao = infos_1.secoes[ask.questionInt('R:  ')];
+                Mercado_1.Mercado.exibir(Mercado_1.Mercado.secoes);
+                secao = Mercado_1.Mercado.secoes[ask.questionInt('R:  ')];
                 valorCompra = ask.questionInt('Qual o novo valor de Compra do Produto?\n R:  ');
                 valorVenda = ask.questionInt('Qual o novo valor de Venda do Produto?\n R:  ');
                 estoque = ask.questionInt('Quantos produtos estão no estoque?\n R:  ');

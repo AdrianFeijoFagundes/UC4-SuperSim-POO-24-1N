@@ -7,3 +7,8 @@ m.adicionarProduto('produto 1', 'marca 1', 'seção 1', 10, 20, 100, m.fornecedo
 
 
 console.log(m.produtos)
+
+
+const d = new Date()
+
+console.log(d)
