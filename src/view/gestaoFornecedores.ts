@@ -1,89 +1,85 @@
-import { Mercado } from "../controllers/Mercado"
-import { Produto } from "../model/Produto"
+import * as ask    from 'readline-sync';
 
-let ask = require("readline-sync")
+import { Mercado } from '../controllers/Mercado';
+import { Produto } from '../model/Produto';
 
-export function gestaoFornecedores(mercado: Mercado): Mercado {
-    let gestaoFornecedoresLoop = true
+export function gestaoFornecedores(mercado: Mercado): void {
+	let opcao = '';
 
-    while (gestaoFornecedoresLoop) {
-        console.clear()
-                console.log(`\
-                -----------------------------
-                -- GESTAO DE FORNECEDORES ---
-                -----------------------------
-                - 1. ADICIONAR FORNECEDOR   -
-                - 2. LISTAR FORNECEDORES    -
-                - 3. ATUALIZAR FORNECEDOR   -
-                - 4. EXCLUIR                -
-                - 5. FAZER PEDIDO           -
-                - 6. VOLTAR                 -
-                -----------------------------
-                `)
-        let userOptionGestaoFuncionario = ask.questionInt("Qual desejas? \nR: ")
+	while (opcao != '0') {
+		let segurarUsuario = false;
 
-        switch (userOptionGestaoFuncionario) {
+		console.clear();
 
-            case 1:
-                console.clear()
-                let cnpj =  ask.question("Qual o CNPJ da empresa?\nR: ")
-                let nomeDaEmpresa = ask.question("Qual o nome da empresa?\nR: ")
-                //Function que cria um fornecedor
-                mercado.adicionarFornecedor(cnpj, nomeDaEmpresa)
-                ask.question("Clique para sair...\n")
-                break
+		console.log(`-------------------------`);
+		console.log(`-  GESTÃO FORNECEDORES  -`);
+		console.log(`-------------------------`);
+		console.log(`- 0. Sair               -`);
+		console.log(`- 1. Adicionar          -`);
+		console.log(`- 2. Listar             -`);
+		console.log(`- 3. Atualizar          -`);
+		console.log(`- 4. Excluir            -`);
+		console.log(`- 5. Repor estoque      -`);
+		console.log(`-------------------------`);
 
-            case 2:
-                console.clear()
-                //Function para listar fornecedores
-                mercado.listarFornecedores()
-                ask.question("Clique para sair...\n")
-                break
+		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3', '4', '5'],
+		                                            limitMessage: 'Digite 0, 1, 2, 3, 4 ou 5.'});
+		
+		switch (opcao) {
+		case '0': break;
+		case '1':
+			mercado.adicionarFornecedor(
+				ask.question('Qual é o CNPJ da empresa? '),
+				ask.question('Qual é o nome da empresa? ')
+			);
+			break;
+		case '2':
+			segurarUsuario = true;
+			mercado.listarFornecedores();
+			break;
+		case '3': {
+			let indice = 0;
+			mercado.listarFornecedores();
 
-            case 3:
-                console.clear()
-                mercado.listarFornecedores()
-                let indice = ask.questionInt("Qual o id do fornecedor?\n R: ")
-                cnpj =  ask.question("Qual o novo CNPJ da empresa?\nR: ")
-                nomeDaEmpresa = ask.question("Qual o novo nome da empresa?\nR: ")
-                //Metodo set do funcionario se baseando no id do mesmo
-                mercado.atualizarFornecedor(indice, cnpj, nomeDaEmpresa)
-                break
+			indice = ask.questionInt('Digite o ID do fornecedor: ');
 
-            case 4:
-                console.clear()
-                //Function para excluir se baseando no id do mesmo
-                mercado.listarFornecedores()
-                cnpj = ask.question("Qual o novo CNPJ do fornecedor que vai ser removido?\nR: ")
-                mercado.removerFornecedor(cnpj)
-                break
-            
-            case 5:
-                const produtosPedido: Produto[] = []
-                mercado.listarProdutos()
-                   
-                    
-                indice = ask.questionInt('Qual o id do produto?\nR: ')
-                let quantidade = ask.questionInt('Quantos produtos deseja pedir ao fornecedor?\nR: ')
-                let produtoEscolhido:Produto = mercado.produtos[indice].clone()
-                produtoEscolhido.setEstoque(quantidade)
-                produtosPedido.push(produtoEscolhido)
-                //Function para realizar pedido
-                mercado.adicionarPedidoFornecedor(produtoEscolhido.getFornecedor().clone(), produtosPedido)
-                console.log("Pedido Realizado com sucesso")
+			mercado.atualizarFornecedor(
+				indice,
+				ask.question('Qual o novo CNPJ da empresa? ', {defaultInput: mercado.fornecedores[indice].getCnpj()}),
+				ask.question('Qual o novo nome da empresa? ', {defaultInput: mercado.fornecedores[indice].getNome()})
+			);
+			break; }
+		case '4':
+			mercado.listarFornecedores();
+			mercado.removerFornecedor(ask.question('Qual o CNPJ do fornecedor a ser removido? '));
+			break;
+		// A fazer: Usar a classe PedidoFornecedor aqui
+		case '5': {
+			let quantidade, indice;
+			segurarUsuario = true;
+			
+			mercado.listarProdutos();
+			
+			/* Havei vós loops de garantir a validade dos dados fornecidos */
+			do {
+				indice = ask.questionInt('Digite o indice do produto: ');
+			} while (indice < 0 || indice >= mercado.produtos.length);
 
-                break
+			do {
+				quantidade = ask.questionInt('Quantos produtos você deseja? ');
+			} while (quantidade <= 0);
 
-            case 6:
-                console.clear()
-                //menu off
-                gestaoFornecedoresLoop = false
-                break
+			if (ask.keyInYN(`Você deseja comprar mais produtos pelo custo de ${mercado.produtos[indice].getValorCompra() * quantidade} (y/n)?`)) {
+				mercado.produtos[indice].setEstoque(mercado.produtos[indice].getEstoque() + quantidade);
+				console.log('Pedido realizado com sucesso! Mais unidades foram adicionadas ao estoque.');
+			} else {
+				console.log('Pedido cancelado.');
+			}
 
-            default:
-                console.log("OPCAO INVALIDA...")
-                break
-        }
-    }
-    return mercado;
+			break; }
+		}
+
+		if (segurarUsuario)
+			ask.question('Pressione a tecla enter para prosseguir...', {hideEchoBack: true, mask: ''});
+	}
 }

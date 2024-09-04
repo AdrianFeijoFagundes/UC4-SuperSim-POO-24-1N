@@ -1,97 +1,77 @@
-import { Mercado } from "../controllers/Mercado"
+import { Venda   } from '../model/Venda';
+
+import { Mercado } from '../controllers/Mercado'
 
 let ask = require("readline-sync");
 
-export function gestaoProdutos(mercado: Mercado): Mercado {
-    let gestaoProdutosLoop = true;
+export function gestaoProdutos(mercado: Mercado): void {
+	let opcao = '';
 
-    while (gestaoProdutosLoop) {
-        console.clear();
-                console.log(`\
-                -----------------------------
-                ----- GESTAO DE PRODUTOS ----
-                -----------------------------
-                - 1. CRIAR PRODUTO          -
-                - 2. LISTAR PRODUTOS        -
-                - 3. ATUALIZAR DADOS PROD.  -
-                - 4. EXCLUIR                -
-                - 5. VOLTAR                 -
-                -----------------------------
-                `);
-        let userOptionGestaoProdutos = ask.questionInt("Qual desejas? \nR: ");
+	while (opcao != '0') {
+		let segurarUsuario = false;
 
-        switch (userOptionGestaoProdutos) {
+		console.clear();
 
-            case 1:
-                console.clear()
-                console.log('Adicionando novo produto');
-                let nome = ask.question('Qual o nome do produto?\n R: ');
-                
-                let marca = ask.question(' Qual a marca do produto?\n R: ');
-                
-                console.log('Qual a seçao do produto?');
-                Mercado.exibir(Mercado.secoes)             
-                let secao = Mercado.secoes[ask.questionInt('R:  ')];
+		console.log(`-------------------------`);
+		console.log(`-    GESTÃO PRODUTOS    -`);
+		console.log(`-------------------------`);
+		console.log(`- 0. Sair               -`);
+		console.log(`- 1. Adicionar          -`);
+		console.log(`- 2. Listar             -`);
+		console.log(`- 3. Atualizar          -`);
+		console.log(`- 4. Remover            -`);
+		console.log(`-------------------------`);
 
-                let valorCompra = ask.questionInt('Qual o valor de Compra do Produto?\n R:  ');
-                let valorVenda = ask.questionInt('Qual o valor de Venda do Produto?\n R:  ');
-                let estoque = ask.questionInt('Quantos produtos vao ser adicionados no estoque?\n R:  ');
+		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3', '4'],
+		                                             limitMessage: "Digite 0, 1, 2, 3 ou 4."});
 
-                mercado.listarFornecedores()
-                let indiceFornecedor = ask.questionInt('Qual o id do fornecedor do produto\n R:  ')
-                let fornecedor = mercado.fornecedores[indiceFornecedor].clone()
-                //Function que cria um produto
-                mercado.adicionarProduto(nome, marca, secao, valorCompra,estoque, valorVenda, fornecedor)
-                break
+		switch (opcao) {
+		case '0': break;
+		case '1':
+			segurarUsuario = true;
+			mercado.adicionarProduto(
+				ask.question('Qual o nome do produto? '),
+				ask.question('Qual a marca do produto? '),
+				ask.keyInSelect(Mercado.secoes, 'Qual a seção do produto?', {cancel: false}),
+				ask.questionInt('Qual o valor de compra do produto? '),
+				ask.questionInt('Qual o valor de venda do produto? '),
+				0 /* Estoque*/,
+				ask.keyInSelect(mercado.fornecedores, 'Qual o fornecedor do produto?', {cancel: false})
+			);
 
-            case 2:
-                console.clear()
-                //Function para listar produtos
-                mercado.listarProdutos()
-                ask.question('\nClique para continuar')
-                break
+			console.log('Produto registrado com sucesso!');
+			console.log('Obs.: Para adicionar produtos no estoque, realize um pedido no menu de fornecedores!');
+			break;
+		case '2':
+			segurarUsuario = true;
+			mercado.listarProdutos();
+			break;
+		case '3': {
+			let indice;
 
-            case 3:
-                //Metodo set do produto se baseando no id do mesmo
-                console.clear();
-                mercado.listarProdutos();
-                let indice = ask.questionInt('Qual o id do produto que vai ser atualizado?\n R: ');
-                nome = ask.question('Qual o novo nome do produto?\n R: ');
-                marca =  ask.question(' Qual nova a marca do produto?\n R: ');
-                console.log('Qual a nova seçao do produto?');
-                Mercado.exibir(Mercado.secoes);           
-                secao = Mercado.secoes[ask.questionInt('R:  ')];
+			mercado.listarProdutos();
 
-                valorCompra = ask.questionInt('Qual o novo valor de Compra do Produto?\n R:  ');
-                valorVenda = ask.questionInt('Qual o novo valor de Venda do Produto?\n R:  ');
-                estoque = ask.questionInt('Quantos produtos estão no estoque?\n R:  ');
+			indice = ask.questionInt()
+			console.log('Nota: Você pode deixar em branco se quiser ignorar os campos');
 
-                mercado.listarFornecedores();
-                indiceFornecedor = ask.questionInt('Qual o id do novo fornecedor do produto\n R:  ');
-                fornecedor = mercado.fornecedores[indiceFornecedor].clone();
-                mercado.atualizarProduto(indice, nome, marca, secao, valorCompra, valorVenda, estoque, fornecedor);
-                break
+			mercado.atualizarProduto(
+				indice,
+				ask.question('Qual o novo nome do produto? ', {defaultInput: null}), 
+				ask.question('Qual a nova marca do produto? ', {defaultInput: null}), 
+				ask.keyInSelect(Mercado.secoes, 'Qual a nova seção do produto? '), 
+				ask.questionInt('Qual o novo valor de compra do produto? ', {defaultInput: null}), 
+				ask.questionInt('Qual o novo valor de venda do produto? ', {defaultInput: null}), 
+				null,
+				ask.keyInSelect(mercado.fornecedores, 'Qual o novo fornecedor do produto? ')
+			);
+			break; }
+		case '4':
+			mercado.listarProdutos();
+			mercado.removerProduto(ask.question('Digite o nome do produto: '), ask.question('Digite a marca do produto: '));
+			break;
+		}
 
-            case 4:
-                //Function para excluir se baseando no id do mesmo
-                console.clear();
-                console.log('Removendo produto');
-                mercado.listarProdutos();
-                nome = ask.question('Qual o nome do produto?\n R:');
-                marca = ask.question('Qual a marca do produto?\n R:');
-                mercado.removerProduto(nome, marca);
-                break
-
-            case 5:
-                console.clear()
-                //menu off
-                gestaoProdutosLoop = false
-                break
-
-            default:
-                console.log("OPCAO INVALIDA...")
-                break
-        }
-    }
-    return mercado;
+		if (segurarUsuario)
+			ask.question('Pressione a tecla enter para prosseguir...', {hideEchoBack: true, mask: ''});
+	}
 }

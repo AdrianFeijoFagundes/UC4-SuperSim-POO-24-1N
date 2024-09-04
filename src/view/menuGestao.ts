@@ -6,60 +6,36 @@ import { gestaoFuncionarios } from "./gestaoFuncionarios"
 import { gestaoProdutos } from "./gestaoProdutos"
 import { menuRelatorios } from "./menuRelatorios"
 
-export function menuGestao(mercado: Mercado): Mercado {
-    let menuGestaoLoop = true
+export function menuGestao(mercado: Mercado): void {
+	let opcao = "";
 
-    while (menuGestaoLoop) {
-        console.clear()
-            console.log(`\
-            -----------------------------
-            ---------- GESTAO -----------
-            -----------------------------
-            - 1. PRODUTOS               -
-            - 2. FUNCIONARIOS           -
-            - 3. FORNECEDORES           -
-            - 4. GERAR RELATORIOS       -
-            - 5. VOLTAR                 -
-            -----------------------------
-            `)
-        let userOptionMenuGestao = ask.questionInt("Qual desejas? \nR: ")
+	while (opcao != '0') {
+		console.clear();
 
-        switch (userOptionMenuGestao) {
+		console.log(`-------------------------`);
+		console.log(`-        GESTÃO         -`);
+		console.log(`-------------------------`);
+		console.log(`- 0. Sair               -`);
+		console.log(`- 1. Produtos           -`);
+		console.log(`- 2. Funcionários       -`);
+		console.log(`- 3. Fornecedores       -`);
+		console.log(`- 4. Relatórios         -`);
+		console.log(`-------------------------`);
 
-            case 1:
-                console.clear()
-                gestaoProdutos(mercado)
-                break
+		opcao = ask.question('Menu selecionado: ', {limit: ['0', '1', '2', '3', '4'],
+		                                            limitMessage: 'Digite 0, 1, 2, 3 ou 4.'});
 
-            case 2:
-                console.clear()
-                //Substituir pelas outras functions de menu GESTAO FUNCIONARIO
-                gestaoFuncionarios(mercado)
-                break
+		switch (opcao) {
+		case '0': break;
+		case '1': gestaoProdutos(mercado); break;
+		case '2': gestaoFuncionarios(mercado); break;
+		case '3': gestaoFornecedores(mercado); break;
+		case '4': menuRelatorios(mercado); break;
+		default:
+			console.error(`Opção inválida.`);
+			ask.question('Pressione a tecla enter para prosseguir...', {hideEchoBack: true, mask: ''});
+		}
 
-            case 3:
-                console.clear()
-                //Substituir pelas outras functions de menu GESTAO FORNECEDORES
-                gestaoFornecedores(mercado)
-                break
-
-            case 4:
-                console.clear()
-                //Substituir pelas outras functions de menu RELATORIOS
-                menuRelatorios(mercado)
-                break
-
-            case 5:
-                console.clear()
-                //menu off
-                menuGestaoLoop = false
-                break
-
-            default:
-                console.log("OPCAO INVALIDA...")
-                break
-        }
-    }
-    return mercado;
+		console.clear();
+	}
 }
-

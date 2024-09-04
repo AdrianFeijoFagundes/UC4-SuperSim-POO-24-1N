@@ -4,18 +4,25 @@
   "description": "## Comandos para BUILD 1. Para a primeira build, instale as dependências NPM do projeto: ```bash npm install typescript --save-dev npm install @types/readline-sync --save-dev npm install -Dtypescript @types/nodenpm npm install readline-sync ``` 2. Transpile o projeto para javascript: ```bash npx tsc src/index.ts ``` 3. Para executar, use: ```bash node src/index.js ```",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^22.5.0",
-    "@types/readline-sync": "^1.4.8",
-    "typescript": "^5.5.4"
-  },
   "dependencies": {
+    "@types/node": "^20.0.0",
+    "@types/readline-sync": "^1.4.8",
     "readline-sync": "^1.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/readline-sync": "^1.4.8",
+    "readline-sync": "^1.4.10",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0"
   },
   "directories": {
     "doc": "docs"

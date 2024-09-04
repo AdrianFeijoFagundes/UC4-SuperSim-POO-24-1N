@@ -1,38 +1,32 @@
-let ask = require("readline-sync")
+import * as ask              from 'readline-sync';
 
-import { Mercado } from "../controllers/Mercado"
-import { menuFuncionamento } from "./menuFuncionamento"
-import { menuGestao } from "./menuGestao"
-
+import { Mercado           } from '../controllers/Mercado';
+import { menuFuncionamento } from './menuFuncionamento';
+import { menuGestao        } from './menuGestao';
 
 export function menuMercado(mercado: Mercado): void {
-    while(true) {
-        console.clear()
-                console.log(`\
-                -----------------------------
-                ---------- MERCADO ----------
-                -----------------------------
-                - 1. GESTAO                 -
-                - 2. FUNCIONAMENTO          -
-                -----------------------------
-                `)
-        let userOptionMenuMercado = ask.questionInt("Qual desejas? \nR: ")
+	let opcao = "";
 
-        switch (userOptionMenuMercado) {
-            
-            case 1:
-                console.clear()
-                menuGestao(mercado)       
-                break
+	while (opcao != '0') {
+		console.clear();
 
-            case 2:
-                console.clear()
-                menuFuncionamento(mercado) 
-                break
+		console.log(`-------------------------`);
+		console.log(`-       MERCADO         -`);
+		console.log(`-------------------------`);
+		console.log(`- 0. Sair               -`);
+		console.log(`- 1. Gestão             -`);
+		console.log(`- 2. Funcionamento      -`);
+		console.log(`-------------------------`);
 
-            default:
-                console.log("OPCAO INVALIDA...")
-                break
-        }
-    }
+		opcao = ask.question('Menu selecionado: ', {limit: ['0', '1', '2'],
+		                                            limitMessage: 'Digite 0, 1 ou 2.'});
+
+		switch (opcao) {
+		case '0': break;
+		case '1': menuGestao(mercado); break;
+		case '2': menuFuncionamento(mercado); break;
+		}
+		
+		console.clear();
+	}
 }
