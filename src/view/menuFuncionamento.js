@@ -16,6 +16,10 @@ function exibirCompras(compras) {
 }
 function menuFuncionamento(mercado) {
     var menuFuncionamentoLoop = true;
+    var backupQuantidades = [];
+    for (var i = 0; i < mercado.produtos.length; i++) {
+        backupQuantidades.push(mercado.produtos[i].getEstoque());
+    }
     var compras = [];
     while (menuFuncionamentoLoop) {
         console.log("\n      -----------------------------\n      ------- FUNCIONAMENTO -------\n      -----------------------------\n      - 1. COMPRAR                -\n      - 2. IR PARA O CAIXA        -\n      - 3. VOLTAR                 -\n      -----------------------------\n");
@@ -79,14 +83,16 @@ function menuFuncionamento(mercado) {
                 break;
             case 3:
                 if (compras.length === 0) {
-                    menuFuncionamentoLoop = false;
                     console.clear();
                 }
                 else {
                     console.log();
-                    ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n");
+                    for (var i = 0; i < mercado.produtos.length; i++) {
+                        mercado.produtos[i].setEstoque(backupQuantidades[i]);
+                    }
+                    //ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n")
                 }
-                //menu off
+                menuFuncionamentoLoop = false;
                 break;
             default:
                 console.clear();

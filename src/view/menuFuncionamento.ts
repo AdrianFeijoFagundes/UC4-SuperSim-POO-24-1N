@@ -18,7 +18,11 @@ function exibirCompras(compras: Produto[]) {
 }
 export function menuFuncionamento(mercado: Mercado): Mercado {
     let menuFuncionamentoLoop = true
+    let backupQuantidades : number[] = []
 
+    for (let i = 0; i < mercado.produtos.length; i++) {
+        backupQuantidades.push(mercado.produtos[i].getEstoque())
+    }
     let compras : Produto[] = [];
     while (menuFuncionamentoLoop) {
         console.log(`
@@ -33,7 +37,7 @@ export function menuFuncionamento(mercado: Mercado): Mercado {
         let userOptionMenuFuncionamento = ask.questionInt("Qual desejas? \nR: ")
 
         console.clear()
-        
+
         switch (userOptionMenuFuncionamento) {
             case 1:
                 console.clear()
@@ -101,16 +105,16 @@ export function menuFuncionamento(mercado: Mercado): Mercado {
 
             case 3:
                 if (compras.length === 0) {
-                    menuFuncionamentoLoop = false
+                    
                     console.clear()
                 } else {
                     console.log()
-                    ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n")
+                    for (let i = 0; i < mercado.produtos.length; i++) {
+                        mercado.produtos[i].setEstoque(backupQuantidades[i])
+                    }
+                    //ask.question("Finaliza a compra antes de voltar... Clique para continuar...\n")
                 }
-               
-
-                //menu off
-
+                menuFuncionamentoLoop = false
                 break
 
             default:
