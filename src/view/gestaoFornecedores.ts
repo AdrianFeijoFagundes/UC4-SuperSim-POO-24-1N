@@ -1,7 +1,8 @@
-import * as ask    from 'readline-sync';
+import * as ask             from 'readline-sync';
 
-import { Mercado } from '../controllers/Mercado';
-import { Produto } from '../model/Produto';
+import { Mercado          } from '../controllers/Mercado';
+import { Produto          } from '../model/Produto';
+import { PedidoFornecedor } from '../model/PedidoFornecedor';
 
 export function gestaoFornecedores(mercado: Mercado): void {
 	let opcao = '';
@@ -53,25 +54,34 @@ export function gestaoFornecedores(mercado: Mercado): void {
 			mercado.listarFornecedores();
 			mercado.removerFornecedor(ask.question('Qual o CNPJ do fornecedor a ser removido? '));
 			break;
-		// A fazer: Usar a classe PedidoFornecedor aqui
 		case '5': {
-			let quantidade, indice;
+			let quantidade = -1, indice = -1;
+			let pedido = new PedidoFornecedor();
+
 			segurarUsuario = true;
-			
-			mercado.listarProdutos();
-			
-			/* Havei vós loops de garantir a validade dos dados fornecidos */
-			do {
-				indice = ask.questionInt('Digite o indice do produto: ');
-			} while (indice < 0 || indice >= mercado.produtos.length);
 
 			do {
-				quantidade = ask.questionInt('Quantos produtos você deseja? ');
-			} while (quantidade <= 0);
+				console.clear();
+				mercado.listarProdutos();
+				
+				/* Havei vós loops de garantir a validade dos dados fornecidos */
+				do {
+					indice = ask.questionInt('Digite o indice do produto: ');
+				} while (indice < 0 || indice >= mercado.produtos.length);
 
-			if (ask.keyInYN(`Você deseja comprar mais produtos pelo custo de ${mercado.produtos[indice].getValorCompra() * quantidade} (y/n)?`)) {
-				mercado.produtos[indice].setEstoque(mercado.produtos[indice].getEstoque() + quantidade);
-				console.log('Pedido realizado com sucesso! Mais unidades foram adicionadas ao estoque.');
+				do {
+					quantidade = ask.questionInt('Quantos produtos você deseja? ');
+				} while (quantidade <= 0);
+
+				for (let i = 0; i < quantidade; ++i) {
+					if (pedido.adicionarProduto(mercado.produtos[indice]) === false)
+						break;
+				}
+			} while (ask.keyInYN('Você deseja adicionar mais um produto? (y/n) '));
+
+			if (ask.keyInYN(`Você deseja comprar mais produtos pelo custo de ${pedido.getValorTotal()} (y/n)?`)) {
+				pedido.realizarPedido();
+				console.log(`Pedido realizado com sucesso! Os produtos foram adicionados ao estoque da loja`);
 			} else {
 				console.log('Pedido cancelado.');
 			}

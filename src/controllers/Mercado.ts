@@ -6,7 +6,7 @@ import { PedidoFornecedor } from '../model/PedidoFornecedor';
 import { Produto          } from '../model/Produto';
 import { Venda            } from '../model/Venda';
 
-export class Mercado {
+export class Mercado {	
 	public fornecedores:      Fornecedor[]       = [];
 	public funcionarios:      Funcionario[]      = [];
 	public produtos:          Produto[]          = [];
@@ -203,9 +203,9 @@ export class Mercado {
 			this.fornecedores[indice].setNome(nome);
 	}
     
-	public adicionarPedidoFornecedor(fornecedor: Fornecedor, produtos: Produto[] | undefined | null): boolean {
+	public adicionarPedidoFornecedor(pedido: PedidoFornecedor): boolean {
 		try { 
-			this.pedidosFornecedor.push(new PedidoFornecedor(fornecedor, produtos));
+			this.pedidosFornecedor.push(pedido);
 			return true;
 		} catch (error) {
 			console.log(`adicionarPedidoFornecedor(): ${error}`);
@@ -267,8 +267,10 @@ export class Mercado {
 		console.log('Relatório de Vendas:');
 		this.vendas.forEach((venda, index) => {
 			let totalCusto: number = 0, totalVenda: number = 0, lucro: number = 0;
+
 			console.log(`Venda ${index + 1}:`);
 			totalVenda = venda.getValorTotal();
+
 			Array.from(venda.getProdutos().entries()).map(([produto, quantidade]) => {
 				totalVenda += quantidade * produto.getValorCompra();
 			});
@@ -306,23 +308,28 @@ export class Mercado {
 		console.log('Relatório de Pedidos de Fornecedores:');
 
 		this.pedidosFornecedor.forEach((pedido, index) => {
-			console.log(`Pedido ${index + 1}:`);
-			console.log(`Fornecedor: ${pedido.getFornecedor().getNome()}`);
+			let fornecedor = pedido.getFornecedor();
 
-			let totalPedido = pedido.getProdutos().reduce((total, produto) => {
-				const subtotal = produto.getEstoque() * produto.getValorCompra();
-				total += subtotal;
-				return total;
-			}, 0);
+			console.log(`Pedido ${index + 1}:`);
+
+			if (fornecedor)
+				console.log(`Fornecedor: ${fornecedor.getNome()}`);
+
+			let totalPedido = 0;
+		
+			pedido.getProdutos().forEach((quantidade, produto) => {
+				const subtotal = quantidade * produto.getValorCompra();
+				totalPedido += subtotal;
+			});
 
 			custoTotalPedidos += totalPedido;
 
-			console.table(pedido.getProdutos().map(produto => ({
+			console.table(Array.from(pedido.getProdutos().entries()).map(([produto, quantidade]) => ({
 				Nome: produto.getNome(),
 				Marca: produto.getMarca(),
-				Quantidade: produto.getEstoque(),
+				Quantidade: quantidade,
 				ValorCompra: produto.getValorCompra(),
-				TotalCompra: produto.getEstoque() * produto.getValorCompra()
+				TotalCompra: quantidade * produto.getValorCompra()
 			})));
 
 			console.log(`Total do Pedido: ${totalPedido}`);
