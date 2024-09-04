@@ -32,11 +32,11 @@ export function gestaoProdutos(mercado: Mercado): void {
 			mercado.adicionarProduto(
 				ask.question('Qual o nome do produto? '),
 				ask.question('Qual a marca do produto? '),
-				ask.keyInSelect(Mercado.secoes, 'Qual a seção do produto?', {cancel: false}),
-				ask.questionInt('Qual o valor de compra do produto? '),
-				ask.questionInt('Qual o valor de venda do produto? '),
+				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a seção do produto?', {cancel: false})],
+				ask.questionFloat('Qual o valor de compra do produto? '),
+				ask.questionFloat('Qual o valor de venda do produto? '),
 				0 /* Estoque*/,
-				ask.keyInSelect(mercado.fornecedores, 'Qual o fornecedor do produto?', {cancel: false})
+				mercado.fornecedores[ask.keyInSelect(mercado.fornecedores, 'Qual o fornecedor do produto?', {cancel: false})]
 			);
 
 			console.log('Produto registrado com sucesso!');
@@ -51,18 +51,18 @@ export function gestaoProdutos(mercado: Mercado): void {
 
 			mercado.listarProdutos();
 
-			indice = ask.questionInt()
-			console.log('Nota: Você pode deixar em branco se quiser ignorar os campos');
+			indice = ask.questionInt('Digite o ID do produto: ');
+			console.log('Nota: Você pode deixar em branco se quiser ignorar os campos de nome e marca');
 
 			mercado.atualizarProduto(
 				indice,
 				ask.question('Qual o novo nome do produto? ', {defaultInput: null}), 
 				ask.question('Qual a nova marca do produto? ', {defaultInput: null}), 
 				ask.keyInSelect(Mercado.secoes, 'Qual a nova seção do produto? '), 
-				ask.questionInt('Qual o novo valor de compra do produto? ', {defaultInput: null}), 
-				ask.questionInt('Qual o novo valor de venda do produto? ', {defaultInput: null}), 
+				ask.questionFloat('Qual o novo valor de compra do produto? '), 
+				ask.questionFloat('Qual o novo valor de venda do produto? '), 
 				null,
-				ask.keyInSelect(mercado.fornecedores, 'Qual o novo fornecedor do produto? ')
+				mercado.fornecedores[ask.keyInSelect(mercado.fornecedores, 'Novo fornecedor para o produto: ')]
 			);
 			break; }
 		case '4':

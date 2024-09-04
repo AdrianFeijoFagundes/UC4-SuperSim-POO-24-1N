@@ -1,7 +1,6 @@
 import { Produto    } from './Produto';
 
 export class Venda {
-	private valorTotal: number = 0;
 	private produtos:   Map<Produto, number>;
 
 	public constructor(produtos?: Produto[] | undefined | null) {
@@ -24,13 +23,18 @@ export class Venda {
 		return quantidadeTotal;
 	}
 
-	public getValorTotal(): number { return this.valorTotal; }
+	public getValorTotal(): number { 
+		let valorTotal = 0;
+		this.produtos.forEach((quantidade, produto) => {
+			valorTotal += quantidade * produto.getValorVenda();
+		});
+
+		return valorTotal;
+	}
 
 	public setProdutos(produtos: Produto[]): void {
 		try {
 			this.produtos.clear();
-			this.valorTotal = 0;
-
 			produtos.forEach(produto => this.adicionarProduto(produto));
 		} catch (error) {
 			console.error(`setProdutos(): ${error}`);
@@ -39,17 +43,11 @@ export class Venda {
 
 	public setProdutosPreMapeados(produtos: Map<Produto, number>) {
 		this.produtos = new Map(produtos);
-
-		this.produtos.forEach((quantidade, produto) => {
-			this.valorTotal += produto.getValorVenda() * quantidade;
-		});
 	}
 	
 	public adicionarProduto(produto: Produto): void {
 		try {
 			const quantidade = this.getQuantidade(produto) + 1;
-
-			this.valorTotal += produto.getValorVenda();
 			this.produtos.set(produto, quantidade);
 		} catch (error) {
 			console.error(`adicionarProduto(): ${error}`);
@@ -104,7 +102,7 @@ export class Venda {
 			string += ` - R$ ${produto.getValorVenda() * quantidade}\n`;
 		});
 
-		string += `Preço final: ${this.valorTotal}\n`;
+		string += `Preço final: ${this.getValorTotal()}\n`;
 		return string;
 	}
 

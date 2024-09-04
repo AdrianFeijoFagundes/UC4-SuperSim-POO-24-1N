@@ -34,7 +34,7 @@ export function gestaoFuncionarios(mercado: Mercado): void {
 					ask.questionInt('Qual o mês da contratação do funcionário? '),
 					ask.questionInt('Qual o ano da contratação do funcionário? '),
 				),
-				ask.keyInSelect(Mercado.cargos, 'Selecione o cargo do funcionário: ', {cancel: false})
+				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o cargo do funcionário: ', {cancel: false})]
 			);
 			break;
 		case '2':
@@ -45,7 +45,7 @@ export function gestaoFuncionarios(mercado: Mercado): void {
 			mercado.listarFuncionarios();
 			mercado.atualizarFuncionario(
 				ask.questionInt('Digite o ID do funcionário: '),
-				ask.keyInSelect(Mercado.cargos, 'Selecione o novo cargo do funcionário: ', {cancel: false})
+				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o novo cargo do funcionário: ', {cancel: false})]
 			);
 			break;
 		case '4':

@@ -20,7 +20,7 @@ export function menuRelatorios(mercado: Mercado): void {
 		                                            limitMessage: 'Digite 0, 1, 2 ou 3.'});
 
 		switch (opcao) {
-		case '0': break;
+		case '0': return;
 		case '1': mercado.relatorioVendas(); break;
 		case '2': mercado.relatorioEstoque(); break;
 		case '3': mercado.relatorioPedidos();
