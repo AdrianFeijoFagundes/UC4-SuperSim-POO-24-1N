@@ -98,7 +98,7 @@ export class Venda {
 		let produtosParaDestruir: Produto[] = [];
 
 		this.produtos.forEach((quantidade, produto) => {
-			if (produto.getEstoque() > quantidade) {
+			if (produto.getEstoque() >= quantidade) {
 				produto.setEstoque(produto.getEstoque() - quantidade);
 			} else {
 				console.error(`O produto ${produto.getMarca()} ${produto.getNome()} não possui um estoque suficiente ${produto.getEstoque()}/${quantidade}, removendo ele da venda.`);
@@ -147,7 +147,7 @@ export class Venda {
 		let indice = 1;
 
 		this.produtos.forEach((quantidade, produto) => {
-			string += `Produto ${indice++}: ${quantidade}x ${produto.getNome()}`
+			string += `${indice++}: ${quantidade}x ${produto.getNome()}`
 			string += ` - R$ ${produto.getValorVenda() * quantidade}\n`;
 		});
 

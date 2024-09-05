@@ -1,7 +1,21 @@
-import { Mercado } from "../controllers/Mercado"
+import * as ask    from 'readline-sync';
 
-let ask = require("readline-sync")
+import { Mercado } from '../controllers/Mercado';
 
+/**
+	* Gerencia as operações relacionadas aos funcionários no sistema de mercado.
+	* Exibe um menu de opções que permite ao usuário admitir, listar, atualizar e demitir funcionários.
+	* O menu continua sendo exibido até que o usuário escolha a opção de sair.
+	*
+	* @param mercado - Instância do objeto `Mercado` que gerencia os funcionários e suas operações.
+	*
+	* Opções do Menu:
+	* - 0: Sair - Encerra o menu de gestão de funcionários.
+	* - 1: Admitir - Admite um novo funcionário, solicitando o CPF, nome, data de contratação e cargo.
+	* - 2: Listar - Lista todos os funcionários atualmente cadastrados. Essa opção segura o usuário até que ele pressione enter.
+	* - 3: Atualizar - Atualiza o cargo de um funcionário existente, com base no ID fornecido.
+	* - 4: Demitir - Remove um funcionário com base no CPF fornecido.
+*/
 export function gestaoFuncionarios(mercado: Mercado): void {
 	let opcao = '';
 	

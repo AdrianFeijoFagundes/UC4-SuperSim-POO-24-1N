@@ -6,26 +6,50 @@ import { PedidoFornecedor } from '../model/PedidoFornecedor';
 import { Produto          } from '../model/Produto';
 import { Venda            } from '../model/Venda';
 
-export class Mercado {	
+/**
+	* Representa o sistema de gerenciamento de um mercado, incluindo produtos, funcionários, fornecedores, vendas e pedidos de fornecedores.
+	* Oferece métodos para adicionar, listar, atualizar e remover itens em cada uma dessas categorias, bem como para gerar relatórios.
+*/
+export class Mercado {
+	/** Lista de fornecedores cadastrados no mercado. */
 	public fornecedores:      Fornecedor[]       = [];
+	/** Lista de funcionários cadastrados no mercado. */
 	public funcionarios:      Funcionario[]      = [];
+	/** Lista de produtos cadastrados no mercado. */
 	public produtos:          Produto[]          = [];
+	/** Lista de vendas realizadas no mercado. */
 	public vendas:            Venda[]            = [];
+	/** Lista de pedidos realizados aos fornecedores. */
 	public pedidosFornecedor: PedidoFornecedor[] = [];
 
+	/** Seções disponíveis para produtos no mercado. */
 	public static secoes: string[] = ['Alimentos', 'Limpeza', 'Bebidas']
+	/** Cargos disponíveis para funcionários no mercado. */
 	public static cargos: string[] = ['Gerente', 'Caixa', 'Estoquista']
 
+	/** Construtor da classe Mercado. Inicializa uma nova instância do mercado. */
 	public constructor() {}
 
+	/**
+		 * Exibe uma mensagem de aviso quando o índice fornecido está fora dos limites.
+		 * @private
+	 */
 	private static indiceInvalido(): void {
 		console.warn(`Posição selecionada fora dos limites.`);
 	}
 
+	/** 
+		* Exibe uma mensagem de aviso quando não há entradas do tipo desejado no sistema.
+		* @private
+	*/
 	private static listandoSemNada(): void {
 		console.warn('Não há entrada do tipo desejado no sistema.');
 	}
 
+	/**
+		* Lista todos os produtos cadastrados no mercado.
+		* Se não houver produtos, exibe uma mensagem de aviso.
+	*/
 	public listarProdutos(): void {
 		if (this.produtos.length === 0) {
 			Mercado.listandoSemNada();
@@ -34,6 +58,17 @@ export class Mercado {
 		}
 	}
 
+	/**
+		* Adiciona um novo produto ao mercado.
+		* @param nome - Nome do produto.
+		* @param marca - Marca do produto.
+		* @param secao - Seção onde o produto está localizado.
+		* @param valorCompra - Valor de compra do produto.
+		* @param valorVenda - Valor de venda do produto.
+		* @param estoque - Quantidade de itens em estoque.
+		* @param fornecedor - Fornecedor do produto.
+		* @returns Retorna true se o produto for adicionado com sucesso; caso contrário, retorna false.
+	*/
 	public adicionarProduto(
 		nome:        string,
 		marca:       string,
@@ -52,6 +87,12 @@ export class Mercado {
 		}
 	}
 
+	/**
+		 * Remove um produto do mercado com base no nome e marca fornecidos.
+		 * @param nome - Nome do produto a ser removido.
+		 * @param marca - Marca do produto a ser removido.
+		 * @returns Retorna true se o produto for removido com sucesso; caso contrário, retorna false.
+	 */
 	public removerProduto(nome: string, marca: string): boolean {
 		try {
 			const indice = this.produtos.findIndex(produto =>
@@ -71,6 +112,17 @@ export class Mercado {
 		}
 	}
 
+	/**
+		* Atualiza as informações de um produto existente.
+		* @param indice - Índice do produto a ser atualizado.
+		* @param nome - Novo nome do produto (opcional).
+		* @param marca - Nova marca do produto (opcional).
+		* @param secao - Nova seção do produto (opcional).
+		* @param valorCompra - Novo valor de compra do produto (opcional).
+		* @param valorVenda - Novo valor de venda do produto (opcional).
+		* @param estoque - Novo valor de estoque do produto (opcional).
+		* @param fornecedor - Novo fornecedor do produto (opcional).
+	*/
 	public atualizarProduto(
 		indice:      number,
 		nome:        string     | undefined | null,
@@ -101,7 +153,11 @@ export class Mercado {
 		if (fornecedor)
 			this.produtos[indice].setFornecedor(fornecedor);
 	}
-	
+
+	/**
+		* Lista todos os funcionários cadastrados no mercado.
+		* Se não houver funcionários, exibe uma mensagem de aviso.
+	*/
 	public listarFuncionarios(): void {
 		if (this.funcionarios.length === 0) {
 			Mercado.listandoSemNada();
@@ -110,6 +166,15 @@ export class Mercado {
 		}
 	}
     
+
+	/**
+		* Adiciona um novo funcionário ao mercado.
+		* @param cpf - CPF do funcionário.
+		* @param nome - Nome do funcionário.
+		* @param dataContratacao - Data de contratação do funcionário.
+		* @param cargo - Cargo do funcionário.
+		* @returns Retorna true se o funcionário for adicionado com sucesso; caso contrário, retorna false.
+	*/
 	public adicionarFuncionario(cpf: string, nome: string, dataContratacao: Date, cargo: string): boolean {
 		try {
 			this.funcionarios.push(new Funcionario(cpf, nome, dataContratacao, cargo));
@@ -120,6 +185,11 @@ export class Mercado {
 		}
 	}
     
+	/**
+		* Remove um funcionário do mercado com base no CPF fornecido.
+		* @param cpf - CPF do funcionário a ser removido.
+		* @returns Retorna true se o funcionário for removido com sucesso; caso contrário, retorna false.
+	*/
 	public removerFuncionario(cpf: string): boolean {
 		try {
 			const indice = this.funcionarios.findIndex(funcionario =>
@@ -138,6 +208,12 @@ export class Mercado {
 		}
 	}
 
+
+	/**
+		* Atualiza o cargo de um funcionário existente.
+		* @param indice - Índice do funcionário a ser atualizado.
+		* @param cargo - Novo cargo do funcionário (opcional).
+	*/
 	public atualizarFuncionario(
 		indice:          number,
 		cargo:           string | undefined | null
@@ -151,6 +227,11 @@ export class Mercado {
 			this.funcionarios[indice].setCargo(cargo);
 	}
 
+
+	/**
+		* Lista todos os fornecedores cadastrados no mercado.
+		* Se não houver fornecedores, exibe uma mensagem de aviso.
+	*/
 	public listarFornecedores(): void {
 		if (this.fornecedores.length === 0) {
 			Mercado.listandoSemNada();
@@ -158,7 +239,13 @@ export class Mercado {
 			console.table(this.fornecedores);
 		}
 	}
-
+	
+	/**
+		* Adiciona um novo fornecedor ao mercado.
+		* @param cnpj - CNPJ do fornecedor.
+		* @param nomeEmpresa - Nome da empresa fornecedora.
+		* @returns Retorna true se o fornecedor for adicionado com sucesso; caso contrário, retorna false.
+	*/
 	public adicionarFornecedor(cnpj: string, nomeEmpresa: string): boolean {
 		try {
 			this.fornecedores.push(new Fornecedor(cnpj, nomeEmpresa));
@@ -169,6 +256,11 @@ export class Mercado {
 		}
 	}
 
+	/**
+		* Remove um fornecedor do mercado com base no CNPJ fornecido.
+		* @param cnpj - CNPJ do fornecedor a ser removido.
+		* @returns Retorna true se o fornecedor for removido com sucesso; caso contrário, retorna false.
+	*/
 	public removerFornecedor(cnpj: string): boolean {
 		try {
 			const indice = this.fornecedores.findIndex(fornecedor =>
@@ -187,6 +279,12 @@ export class Mercado {
 		}
 	}
 
+	/**
+		* Atualiza as informações de um fornecedor existente.
+		* @param indice - Índice do fornecedor a ser atualizado.
+		* @param cnpj - Novo CNPJ do fornecedor (opcional).
+		* @param nome - Novo nome da empresa fornecedora (opcional).
+	*/
 	public atualizarFornecedor(
 		indice: number,
 		cnpj:   string | undefined | null,
@@ -202,7 +300,12 @@ export class Mercado {
 		if (nome)
 			this.fornecedores[indice].setNome(nome);
 	}
-    
+   
+	/**
+		* Adiciona um novo pedido de fornecedor ao mercado.
+		* @param pedido - Pedido de fornecedor a ser adicionado.
+		* @returns Retorna true se o pedido for adicionado com sucesso; caso contrário, retorna false.
+	*/
 	public adicionarPedidoFornecedor(pedido: PedidoFornecedor): boolean {
 		try { 
 			this.pedidosFornecedor.push(pedido);
@@ -213,6 +316,10 @@ export class Mercado {
 		}
 	}
 	
+	/**
+		* Lista todos os pedidos de fornecedores realizados.
+		* Se não houver pedidos, exibe uma mensagem de aviso.
+	*/
 	public listarPedidosFornecedor(): void {
 		if (this.pedidosFornecedor.length === 0) {
 			Mercado.listandoSemNada();
@@ -220,7 +327,12 @@ export class Mercado {
 		}
 		console.table(this.pedidosFornecedor);
 	}
-	
+
+	/**
+		* Adiciona uma nova venda ao mercado.
+		* @param venda - Venda a ser adicionada.
+		* @returns Retorna true se a venda for adicionada com sucesso; caso contrário, retorna false.
+	*/
 	public adicionarVenda(venda: Venda): boolean {
 		try {
 			this.vendas.push(venda);
@@ -231,6 +343,11 @@ export class Mercado {
 		}
 	}
 
+
+	/**
+		* Lista todas as vendas realizadas no mercado.
+		* Se não houver vendas, exibe uma mensagem de aviso.
+	*/
 	public listarVendas(): void {
 		if (this.vendas.length === 0) {
 			Mercado.listandoSemNada();
@@ -239,6 +356,10 @@ export class Mercado {
 		console.table(this.vendas);
 	}
 
+	/**
+		* Gera um relatório do estoque atual, exibindo informações sobre cada produto.
+		* Se não houver produtos, exibe uma mensagem de aviso.
+	*/
 	public relatorioEstoque(): void {
 		if (this.produtos.length === 0) {
 			Mercado.listandoSemNada();
@@ -256,6 +377,11 @@ export class Mercado {
 		})));
 	}
 
+	/**
+		* Gera um relatório detalhado das vendas realizadas.
+		* Exibe o total de lucro obtido em cada venda e o lucro total acumulado.
+		* Se não houver vendas, exibe uma mensagem de aviso.
+	*/
 	public relatorioVendas(): void {
 		let totalLucro = 0;
 
@@ -296,7 +422,11 @@ export class Mercado {
 
 		console.log(`Lucro Total das Vendas: ${totalLucro}`);
 	}
-
+	/**
+		* Gera um relatório detalhado dos pedidos realizados aos fornecedores.
+		* Exibe o custo total de cada pedido e o custo total acumulado.
+		* Se não houver pedidos, exibe uma mensagem de aviso.
+	*/
 	public relatorioPedidos(): void {
 		let custoTotalPedidos = 0;
 

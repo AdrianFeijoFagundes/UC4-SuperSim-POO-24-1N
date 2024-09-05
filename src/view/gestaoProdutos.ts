@@ -1,16 +1,27 @@
+import * as ask    from 'readline-sync';
+
 import { Venda   } from '../model/Venda';
+import { Mercado } from '../controllers/Mercado';
 
-import { Mercado } from '../controllers/Mercado'
-
-let ask = require("readline-sync");
-
+/**
+	* Gerencia as operações relacionadas aos produtos registrados no sistema de mercado.
+	* Oferece um menu interativo para adicionar, listar, atualizar e remover produtos.
+	* O menu continua sendo exibido até que o usuário escolha a opção de sair.
+	*
+	* @param mercado - Instância do controlador de mercado onde as operações de produto serão realizadas.
+	*
+	* Opções do Menu:
+	* - 0: Sair - Encerra o menu de gestão de produtos.
+	* - 1: Adicionar - Permite adicionar um novo produto. Essa opção segura o usuário até que ele pressione enter.
+	* - 2: Listar - Lista todos os produtos atualmente cadastrados. Essa opção segura o usuário até que ele pressione enter.
+	* - 3: Atualizar - Atualiza as informações de um produto existente. Essa opção segura o usuário até que ele pressione enter.
+	* - 4: Remover - Remove um produto com base no nome e marca fornecidos.
+*/
 export function gestaoProdutos(mercado: Mercado): void {
 	let opcao = '';
 
 	while (opcao != '0') {
 		let segurarUsuario = false;
-
-		console.clear();
 
 		console.log(`-------------------------`);
 		console.log(`-    GESTÃO PRODUTOS    -`);
@@ -27,7 +38,12 @@ export function gestaoProdutos(mercado: Mercado): void {
 
 		switch (opcao) {
 		case '0': break;
-		case '1':
+		case '1': {
+			let stringFornecedores: string[] = [];
+			mercado.fornecedores.forEach(fornecedor =>
+				stringFornecedores.push(fornecedor.toString())
+			);
+
 			segurarUsuario = true;
 			mercado.adicionarProduto(
 				ask.question('Qual o nome do produto? '),
@@ -35,35 +51,43 @@ export function gestaoProdutos(mercado: Mercado): void {
 				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a seção do produto?', {cancel: false})],
 				ask.questionFloat('Qual o valor de compra do produto? '),
 				ask.questionFloat('Qual o valor de venda do produto? '),
-				0 /* Estoque*/,
-				mercado.fornecedores[ask.keyInSelect(mercado.fornecedores, 'Qual o fornecedor do produto?', {cancel: false})]
+				ask.questionInt('Quantos itens o produto já tem em estoque?'),
+				mercado.fornecedores[ask.keyInSelect(stringFornecedores, 'Qual o fornecedor do produto?', {cancel: false})]
 			);
 
 			console.log('Produto registrado com sucesso!');
-			console.log('Obs.: Para adicionar produtos no estoque, realize um pedido no menu de fornecedores!');
-			break;
+			console.info('Nota: Para adicionar mais produtos no estoque, realize um pedido no menu de fornecedores.');
+			break; }
 		case '2':
 			segurarUsuario = true;
 			mercado.listarProdutos();
 			break;
 		case '3': {
+			let stringFornecedores: string[] = [];
+			mercado.fornecedores.forEach(fornecedor =>
+				stringFornecedores.push(fornecedor.toString())
+			);
 			let indice;
+
+			segurarUsuario = true;
 
 			mercado.listarProdutos();
 
 			indice = ask.questionInt('Digite o ID do produto: ');
-			console.log('Nota: Você pode deixar em branco se quiser ignorar os campos de nome e marca');
+			console.info('Nota: Você pode deixar em branco se quiser ignorar os campos de nome e marca.');
 
 			mercado.atualizarProduto(
 				indice,
-				ask.question('Qual o novo nome do produto? ', {defaultInput: null}), 
-				ask.question('Qual a nova marca do produto? ', {defaultInput: null}), 
-				ask.keyInSelect(Mercado.secoes, 'Qual a nova seção do produto? '), 
+				ask.question('Qual o novo nome do produto? ', {defaultInput: undefined}), 
+				ask.question('Qual a nova marca do produto? ', {defaultInput: undefined}), 
+				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a nova seção do produto? ')], 
 				ask.questionFloat('Qual o novo valor de compra do produto? '), 
 				ask.questionFloat('Qual o novo valor de venda do produto? '), 
-				null,
-				mercado.fornecedores[ask.keyInSelect(mercado.fornecedores, 'Novo fornecedor para o produto: ')]
+				undefined,
+				mercado.fornecedores[ask.keyInSelect(stringFornecedores, 'Novo fornecedor para o produto: ')]
 			);
+
+			console.info('Produto alterado com sucesso!');
 			break; }
 		case '4':
 			mercado.listarProdutos();

@@ -126,7 +126,7 @@ export class PedidoFornecedor {
 		let indice = 1;
 
 		this.produtos.forEach((quantidade, produto) => {
-			string += `Produto ${indice++}: ${quantidade}x ${produto.getNome()}`
+			string += `${indice++}: ${quantidade}x ${produto.getNome()}`
 			string += ` - R$ ${produto.getValorCompra() * quantidade}\n`;
 		});
 
