@@ -1,3 +1,7 @@
+/**
+	* @module view
+**/
+
 import * as ask             from 'readline-sync';
 
 import { Mercado          } from '../controllers/Mercado';

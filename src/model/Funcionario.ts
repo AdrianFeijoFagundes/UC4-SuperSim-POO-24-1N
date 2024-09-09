@@ -1,4 +1,8 @@
 /**
+	* @module model
+**/
+
+/**
 	* Representa um funcionário no sistema.
 */
 export class Funcionario {

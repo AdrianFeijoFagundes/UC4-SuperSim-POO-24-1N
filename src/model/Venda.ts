@@ -1,3 +1,7 @@
+/**
+	* @module model
+**/
+
 import { Produto    } from './Produto';
 
 /**

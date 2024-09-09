@@ -1,4 +1,8 @@
 /**
+	* @module model
+**/
+
+/**
 	* Representa um fornecedor no sistema.
 */
 export class Fornecedor {

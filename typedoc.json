@@ -1,5 +1,6 @@
 {
 	"entryPoints": ["./src/index.ts", "./src/model/*", "./src/view/*", "./src/controllers/*"],
 	"plugin": ["typedoc-plugin-markdown"],
+	"readme": ".docs_README.md",
 	"name": "SuperSim POO 24 1N"
 }

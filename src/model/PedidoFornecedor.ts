@@ -1,3 +1,7 @@
+/**
+	* @module model
+**/
+
 import { Fornecedor } from './Fornecedor';
 import { Produto    } from './Produto';
 

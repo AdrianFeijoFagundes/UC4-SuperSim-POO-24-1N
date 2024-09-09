@@ -1,3 +1,7 @@
+/**
+	* @module controllers
+**/
+
 import * as ask             from 'readline-sync';
 
 import { Fornecedor       } from '../model/Fornecedor';
