@@ -7,14 +7,14 @@
 Este é um projeto desenvolvido para a disciplina de **Orientação à Objetos** da turma 24-1N do **SENAC**. Ele é licensiado sobre a [MIT](./LICENSE)
 
 ## Participantes/Autores
-	- Adrian Feijo Fagundes
-	- Natan Gabriel
-	- Ariel Lorenz
-	- Arthur de Souza Manske
-	- Guilherme Keller
-	- Gustavo Ribeiro
-	- Maria Eduarda Costa
-	- Emanuel Chaves
+- Adrian Feijo Fagundes
+- Natan Gabriel
+- Ariel Lorenz
+- Arthur de Souza Manske
+- Guilherme Keller
+- Gustavo Ribeiro
+- Maria Eduarda Costa
+- Emanuel Chaves
 
 ## Comandos para BUILD
 1. Para a primeira build, instale todas as dependências NPM do projeto:
