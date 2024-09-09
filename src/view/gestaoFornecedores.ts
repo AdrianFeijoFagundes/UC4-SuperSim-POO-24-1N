@@ -102,6 +102,7 @@ export function gestaoFornecedores(mercado: Mercado): void {
 
 			if (ask.keyInYN(`Deseja comprar mais produtos pelo custo de ${pedido.getValorTotal()} (y/n)?`)) {
 				pedido.realizarPedido();
+				mercado.pedidosFornecedor.push(pedido);
 				console.log(`Pedido realizado com sucesso! Os produtos foram adicionados ao estoque da loja`);
 			} else {
 				console.log('Pedido cancelado.');
