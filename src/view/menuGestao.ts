@@ -28,7 +28,7 @@ export function menuGestao(mercado: Mercado): void {
 		console.log(`-------------------------`);
 		console.log(`- 0. Sair               -`);
 		console.log(`- 1. Produtos           -`);
-		console.log(`- 2. Funcionários       -`);
+		console.log(`- 2. Funcionarios       -`);
 		console.log(`- 3. Fornecedores       -`);
 		console.log(`-------------------------`);
 

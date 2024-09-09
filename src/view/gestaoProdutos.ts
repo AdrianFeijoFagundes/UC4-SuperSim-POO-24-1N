@@ -33,8 +33,8 @@ export function gestaoProdutos(mercado: Mercado): void {
 		console.log(`- 4. Remover            -`);
 		console.log(`-------------------------`);
 
-		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3', '4'],
-		                                             limitMessage: "Digite 0, 1, 2, 3 ou 4."});
+		opcao = ask.question('Opcao selecionada: ', {limit: ['0', '1', '2', '3', '4'],
+	                                             limitMessage: "Digite 0, 1, 2, 3 ou 4."});
 
 		switch (opcao) {
 		case '0': break;
@@ -48,10 +48,10 @@ export function gestaoProdutos(mercado: Mercado): void {
 			mercado.adicionarProduto(
 				ask.question('Qual o nome do produto? '),
 				ask.question('Qual a marca do produto? '),
-				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a seção do produto?', {cancel: false})],
+				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a secao do produto?', {cancel: false})],
 				ask.questionFloat('Qual o valor de compra do produto? '),
 				ask.questionFloat('Qual o valor de venda do produto? '),
-				ask.questionInt('Quantos itens o produto já tem em estoque?'),
+				ask.questionInt('Quantos itens o produto ja tem em estoque?'),
 				mercado.fornecedores[ask.keyInSelect(stringFornecedores, 'Qual o fornecedor do produto?', {cancel: false})]
 			);
 
@@ -74,13 +74,13 @@ export function gestaoProdutos(mercado: Mercado): void {
 			mercado.listarProdutos();
 
 			indice = ask.questionInt('Digite o ID do produto: ');
-			console.info('Nota: Você pode deixar em branco se quiser ignorar os campos de nome e marca.');
+			console.info('Nota: Voce pode deixar em branco se quiser ignorar os campos de nome e marca.');
 
 			mercado.atualizarProduto(
 				indice,
 				ask.question('Qual o novo nome do produto? ', {defaultInput: undefined}), 
 				ask.question('Qual a nova marca do produto? ', {defaultInput: undefined}), 
-				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a nova seção do produto? ')], 
+				Mercado.secoes[ask.keyInSelect(Mercado.secoes, 'Qual a nova secao do produto? ')], 
 				ask.questionFloat('Qual o novo valor de compra do produto? '), 
 				ask.questionFloat('Qual o novo valor de venda do produto? '), 
 				undefined,

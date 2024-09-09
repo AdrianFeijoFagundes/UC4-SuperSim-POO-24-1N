@@ -28,7 +28,7 @@ export function menuRelatorios(mercado: Mercado): void {
 		console.log(`- 3. Pedidos            -`);
 		console.log(`-------------------------`);
 
-		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3'],
+		opcao = ask.question('Opcao selecionada: ', {limit: ['0', '1', '2', '3'],
 		                                            limitMessage: 'Digite 0, 1, 2 ou 3.'});
 
 		switch (opcao) {

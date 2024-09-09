@@ -27,9 +27,9 @@ export function menuMercado(mercado: Mercado): void {
 		console.log(`-       MERCADO         -`);
 		console.log(`-------------------------`);
 		console.log(`- 0. Sair               -`);
-		console.log(`- 1. Gestão             -`);
+		console.log(`- 1. Gestao             -`);
 		console.log(`- 2. Funcionamento      -`);
-		console.log(`- 3. Relatórios         -`);
+		console.log(`- 3. Relatorios         -`);
 		console.log(`-------------------------`);
 
 		opcao = ask.question('Menu selecionado: ', {limit: ['0', '1', '2', '3'],

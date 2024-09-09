@@ -34,21 +34,21 @@ export function gestaoFuncionarios(mercado: Mercado): void {
 		console.log(`- 4. Demitir            -`);
 		console.log(`-------------------------`);
 
-		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3', '4'],
+		opcao = ask.question('Opcao selecionada: ', {limit: ['0', '1', '2', '3', '4'],
 		                                             limitMessage: "Digite 0, 1, 2, 3 ou 4."});
 		
 		switch (opcao) {
 		case '0': break;
 		case '1':
 			mercado.adicionarFuncionario(
-				ask.question('Qual o CPF do funcionário? '),
-				ask.question('Qual o nome do funcionário? '),
+				ask.question('Qual o CPF do funcionario? '),
+				ask.question('Qual o nome do funcionario? '),
 				new Date(
-					ask.questionInt('Qual o dia da contratação do funcionário? '),
-					ask.questionInt('Qual o mês da contratação do funcionário? '),
-					ask.questionInt('Qual o ano da contratação do funcionário? '),
+					ask.questionInt('Qual o dia da contratacao do funcionario? '),
+					ask.questionInt('Qual o mês da contratacao do funcionario? '),
+					ask.questionInt('Qual o ano da contratacao do funcionario? '),
 				),
-				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o cargo do funcionário: ', {cancel: false})]
+				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o cargo do funcionario: ', {cancel: false})]
 			);
 			break;
 		case '2':
@@ -58,13 +58,13 @@ export function gestaoFuncionarios(mercado: Mercado): void {
 		case '3':
 			mercado.listarFuncionarios();
 			mercado.atualizarFuncionario(
-				ask.questionInt('Digite o ID do funcionário: '),
-				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o novo cargo do funcionário: ', {cancel: false})]
+				ask.questionInt('Digite o ID do funcionario: '),
+				Mercado.cargos[ask.keyInSelect(Mercado.cargos, 'Selecione o novo cargo do funcionario: ', {cancel: false})]
 			);
 			break;
 		case '4':
 			mercado.listarFuncionarios();
-			mercado.removerFuncionario(ask.question('Digite o CPF do funcionário: '));
+			mercado.removerFuncionario(ask.question('Digite o CPF do funcionario: '));
 			break;
 		}
 

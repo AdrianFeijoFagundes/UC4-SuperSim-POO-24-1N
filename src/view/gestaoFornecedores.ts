@@ -38,7 +38,7 @@ export function gestaoFornecedores(mercado: Mercado): void {
 		console.log(`- 5. Repor estoque      -`);
 		console.log(`-------------------------`);
 
-		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3', '4', '5'],
+		opcao = ask.question('Opcao selecionada: ', {limit: ['0', '1', '2', '3', '4', '5'],
 		                                            limitMessage: 'Digite 0, 1, 2, 3, 4 ou 5.'});
 		
 		switch (opcao) {
@@ -94,9 +94,9 @@ export function gestaoFornecedores(mercado: Mercado): void {
 					if (pedido.adicionarProduto(mercado.produtos[indice]) === false)
 						break;
 				}
-			} while (ask.keyInYN('Você deseja adicionar mais um produto? (y/n) '));
+			} while (ask.keyInYN('Deseja adicionar mais um produto? (y/n) '));
 
-			if (ask.keyInYN(`Você deseja comprar mais produtos pelo custo de ${pedido.getValorTotal()} (y/n)?`)) {
+			if (ask.keyInYN(`Deseja comprar mais produtos pelo custo de ${pedido.getValorTotal()} (y/n)?`)) {
 				pedido.realizarPedido();
 				console.log(`Pedido realizado com sucesso! Os produtos foram adicionados ao estoque da loja`);
 			} else {

@@ -27,7 +27,7 @@ mercado.adicionarProduto('detergente', '', Mercado.secoes[1], 10, 20, 100, merca
 mercado.adicionarProduto('refri', '', Mercado.secoes[2], 10, 20, 100, mercado.fornecedores[2]);
 mercado.adicionarProduto('cerveja', '', Mercado.secoes[2], 10, 20, 100, mercado.fornecedores[3]);
 mercado.adicionarProduto('salgadinho', '', Mercado.secoes[0], 10, 20, 100, mercado.fornecedores[3]);
-mercado.adicionarProduto('maças', '', Mercado.secoes[0], 10, 20, 100, mercado.fornecedores[4]);
+mercado.adicionarProduto('macas', '', Mercado.secoes[0], 10, 20, 100, mercado.fornecedores[4]);
 
 mercado.adicionarFuncionario('04522681097','adrian', new Date(2024, 9, 3), Mercado.cargos[0]);
 

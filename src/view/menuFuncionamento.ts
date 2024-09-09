@@ -33,7 +33,7 @@ export function menuFuncionamento(mercado: Mercado): void {
 		console.log(`- 3. Listar Vendas           -`);
 		console.log(`------------------------------`);
 
-		opcao = ask.question('Opção selecionada: ', {limit: ['0', '1', '2', '3'],
+		opcao = ask.question('Opcao selecionada: ', {limit: ['0', '1', '2', '3'],
 		                                             limitMessage: "Digite 0, 1, 2 ou 3."});
 
 		switch (opcao) {
@@ -46,7 +46,7 @@ export function menuFuncionamento(mercado: Mercado): void {
 			segurarUsuario = true;
 
 			if (mercado.produtos.length === 0) {
-				console.error('O sistema está sem produtos registrados, não é possível vender!');
+				console.error('O sistema esta sem produtos registrados, nao ha como vender!');
 				break;
 			}
 			

@@ -35,7 +35,7 @@ export class Mercado {
 		 * @private
 	 */
 	private static indiceInvalido(): void {
-		console.warn(`Posição selecionada fora dos limites.`);
+		console.warn(`Posicao selecionada fora dos limites.`);
 	}
 
 	/** 
@@ -100,7 +100,7 @@ export class Mercado {
 			);
 
 			if (indice < 0) {
-		                console.warn(`Produto com nome "${nome}" e marca "${marca}" não encontrado.`);
+		                console.warn(`Produto com nome "${nome}" e marca "${marca}" nao encontrado.`);
 				return false;
 			}
 			
@@ -196,7 +196,7 @@ export class Mercado {
 				funcionario.getCpf() === cpf);
 
 			if (indice < 0) {
-				console.warn(`Funcionário com CPF "${cpf}" não encontrado.`);
+				console.warn(`Funcionário com CPF "${cpf}" nao encontrado.`);
 				return false;
 			}
 
@@ -267,7 +267,7 @@ export class Mercado {
 				fornecedor.getCnpj() === cnpj);
 			
 			if (indice < 0) {
-				console.warn(`Fornecedor com CNPJ "${cnpj}" não encontrado.`);
+				console.warn(`Fornecedor com CNPJ "${cnpj}" nao encontrado.`);
 				return false;
 			}
 
@@ -361,20 +361,22 @@ export class Mercado {
 		* Se não houver produtos, exibe uma mensagem de aviso.
 	*/
 	public relatorioEstoque(): void {
+		let estoqueTotal = 0;
+
 		if (this.produtos.length === 0) {
 			Mercado.listandoSemNada();
 			return;
 		}
 
-		console.log('Relatório do Estoque:');
-		console.table(this.produtos.map(produto => ({
-			Nome: produto.getNome(),
-			Marca: produto.getMarca(),
-			Seção: produto.getSecao(),
-			Estoque: produto.getEstoque(),
-			ValorCompra: produto.getValorCompra(),
-			ValorVenda: produto.getValorVenda()
-		})));
+		console.log('Relatorio do Estoque:');
+			
+		this.produtos.forEach(produto => {
+			console.log(`Nome: ${produto.getNome()}`);
+			console.log(`-> Estoque: ${produto.getEstoque()}`);
+			estoqueTotal += produto.getEstoque();
+		});
+
+		console.log(`Total de produtos em estoque: ${estoqueTotal}`);
 	}
 
 	/**
@@ -390,7 +392,7 @@ export class Mercado {
 			return;
 		}
 
-		console.log('Relatório de Vendas:');
+		console.log('Relatorio de Vendas:');
 		this.vendas.forEach((venda, index) => {
 			let totalCusto: number = 0, totalVenda: number = 0, lucro: number = 0;
 
@@ -435,7 +437,7 @@ export class Mercado {
 			return;
 		}
 
-		console.log('Relatório de Pedidos de Fornecedores:');
+		console.log('Relatorio de Pedidos de Fornecedores:');
 
 		this.pedidosFornecedor.forEach((pedido, index) => {
 			let fornecedor = pedido.getFornecedor();
