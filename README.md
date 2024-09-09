@@ -14,7 +14,7 @@ Este é um projeto desenvolvido para a disciplina de **Orientação à Objetos**
 	- Guilherme Keller
 	- Gustavo Ribeiro
 	- Maria Eduarda Costa
-	- Emanuel
+	- Emanuel Chaves
 
 ## Comandos para BUILD
 1. Para a primeira build, instale todas as dependências NPM do projeto:
