@@ -23,8 +23,8 @@
     "@types/readline-sync": "^1.4.8",
     "readline-sync": "^1.4.10",
     "ts-node": "^10.0.0",
-    "typedoc": "^0.26.6",
-    "typedoc-plugin-markdown": "^4.2.6",
+    "typedoc": "^0.26.7",
+    "typedoc-plugin-markdown": "^4.2.7",
     "typescript": "^5.0.0"
   },
   "directories": {

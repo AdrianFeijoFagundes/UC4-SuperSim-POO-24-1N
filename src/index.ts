@@ -1,7 +1,9 @@
 /**
-	* @module
 	*
+	* @file index
 	* @brief Arquivo principal
+	*	
+	* @module
 	* 
 	* Este arquivo serve como o ponto inicial do aplicativo. Ele inicializa o sistema, 
 	* cria uma instância do controlador de mercado e apresenta o menu principal para o usuário.
