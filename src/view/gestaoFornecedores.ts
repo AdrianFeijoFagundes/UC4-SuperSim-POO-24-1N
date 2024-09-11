@@ -113,5 +113,7 @@ export function gestaoFornecedores(mercado: Mercado): void {
 
 		if (segurarUsuario)
 			ask.question('Pressione a tecla enter para prosseguir...', {hideEchoBack: true, mask: ''});
+
+		console.clear();
 	}
 }

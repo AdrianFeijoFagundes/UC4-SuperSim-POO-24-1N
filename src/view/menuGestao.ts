@@ -38,7 +38,6 @@ export function menuGestao(mercado: Mercado): void {
 
 		opcao = ask.question('Menu selecionado: ', {limit: ['0', '1', '2', '3'],
 		                                            limitMessage: 'Digite 0, 1, 2 ou 3.'});
-
 		switch (opcao) {
 		case '0': break;
 		case '1': gestaoProdutos(mercado);     break;
