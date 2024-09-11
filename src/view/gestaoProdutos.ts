@@ -27,6 +27,8 @@ export function gestaoProdutos(mercado: Mercado): void {
 	while (opcao != '0') {
 		let segurarUsuario = false;
 
+		console.clear();
+
 		console.log(`-------------------------`);
 		console.log(`-    GESTÃO PRODUTOS    -`);
 		console.log(`-------------------------`);
